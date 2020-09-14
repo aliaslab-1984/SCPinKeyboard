@@ -20,7 +20,7 @@ class SecretInputView: UIView {
     override init(frame: CGRect) {
         
         let radius: CGFloat = 0.15 * min(frame.size.height, frame.size.width)
-        tick = SecretInputView.circleView(with: radius)
+        tick = SecretInputView.circleView(with: radius, color: .blue)
         super.init(frame: frame)
         
         backgroundColor = UIColor.clear
@@ -46,11 +46,11 @@ class SecretInputView: UIView {
                                          attribute: .centerX, multiplier: 1, constant: 0))
     }
     
-    override func draw(_ rect: CGRect, borderColor: UIColor) {
+    override func draw(_ rect: CGRect) {
         
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineWidth(2.0)
-            context.setStrokeColor(borderColor.cgColor)
+            context.setStrokeColor(UIColor.purple.cgColor)
             context.move(to: CGPoint(x: 0, y: self.frame.height))
             context.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
             context.strokePath()
