@@ -97,7 +97,7 @@ public class PinView: UIView {
 
 extension PinView: SCKeyboardDelegate {
     
-    func userDidPressKey(keyValue: Int) {
+    public func userDidPressKey(keyValue: Int) {
         
         //printDebug("Pressed: \(keyValue)")
         
