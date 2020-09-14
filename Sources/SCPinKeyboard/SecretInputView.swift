@@ -9,7 +9,7 @@
 #if canImport(UIKit)
 import UIKit
 
-class SecretInputView: UIView {
+public class SecretInputView: UIView {
     
     private let tick: UIView
 
@@ -46,7 +46,7 @@ class SecretInputView: UIView {
                                          attribute: .centerX, multiplier: 1, constant: 0))
     }
     
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineWidth(2.0)

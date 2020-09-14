@@ -15,7 +15,7 @@ protocol SCKeyboardDelegate: class {
 }
 
 @IBDesignable
-class SCKeyboard: UIView, NibLoadable {
+public class SCKeyboard: UIView, NibLoadable {
 
     private weak var delegate: SCKeyboardDelegate?
     
