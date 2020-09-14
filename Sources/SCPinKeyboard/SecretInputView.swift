@@ -50,7 +50,7 @@ class SecretInputView: UIView {
         
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineWidth(2.0)
-            context.setStrokeColor(borderColor)
+            context.setStrokeColor(borderColor.cgColor)
             context.move(to: CGPoint(x: 0, y: self.frame.height))
             context.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
             context.strokePath()
