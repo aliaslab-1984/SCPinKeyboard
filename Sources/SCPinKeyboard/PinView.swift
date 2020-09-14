@@ -9,11 +9,11 @@
 #if canImport(UIKit)
 import UIKit
 
-protocol PinValidator: class {
+public protocol PinValidator: class {
     func validate()
 }
 
-class PinView: UIView {
+public class PinView: UIView {
     
     private let spaceBetweenPinViews: CGFloat = 8
     

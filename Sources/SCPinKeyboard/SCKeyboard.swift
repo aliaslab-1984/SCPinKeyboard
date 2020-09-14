@@ -9,7 +9,7 @@
 #if canImport(UIKit)
 import UIKit
 
-protocol SCKeyboardDelegate: class {
+public protocol SCKeyboardDelegate: class {
     
     func userDidPressKey(keyValue: Int)
 }
