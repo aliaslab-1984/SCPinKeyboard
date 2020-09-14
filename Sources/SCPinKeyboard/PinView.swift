@@ -20,6 +20,8 @@ class PinView: UIView {
     private var inputViews = [SecretInputView]()
     private var pinBuffer = ""
     
+    private var pinLength = 6
+    
     private weak var delegate: PinValidator?
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,15 +30,19 @@ class PinView: UIView {
         drawInputFrames()
     }
     
+    func setPinLength(_ length:Int) {
+        pinLength = length
+    }
+    
     private func drawInputFrames() {
         
-        let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(PIN_LENGTH - 1)) / CGFloat(PIN_LENGTH)
+        let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength - 1)) / CGFloat(pinLength)
         let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
         let dy = (frame.height - sideLength) / 2.0
         
         inputViews.removeAll()
         
-        for i in 0 ..< PIN_LENGTH {
+        for i in 0 ..< pinLength {
             let iView = SecretInputView(frame: CGRect(x: (sideLength + spaceBetweenPinViews) * CGFloat(i),
                                                       y: dy, width: sideLength, height: sideLength))
             inputViews.append(iView)
@@ -106,7 +112,7 @@ extension PinView: SCKeyboardDelegate {
             }
             // keyboard can handle another key with value -2. Here is not needed
         } else {
-            if marked < PIN_LENGTH {
+            if marked < pinLength {
                 pinBuffer += String(format: "%ld", Int(keyValue))
                 changeStatusOfInputViews(marked)
             }
