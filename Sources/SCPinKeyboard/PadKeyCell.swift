@@ -39,6 +39,7 @@ final class PadKey: UICollectionViewCell {
         let mask: CAShapeLayer = .init()
         
         mask.path = path.cgPath
+        mask.fillColor = UIColor.clear.cgColor
         layer.mask = mask
         
         setNeedsDisplay()
