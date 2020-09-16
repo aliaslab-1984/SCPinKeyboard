@@ -96,9 +96,19 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         // TODO: Fix it
         delegate?.userDidPressKey(keyValue: indexPath.item)
     }
+    
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 extension CustomSCKeyboard: UICollectionViewDataSource {
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return 12
@@ -133,6 +143,7 @@ final class PadKey: UICollectionViewCell {
     private let label: UILabel = {
         let lab = UILabel()
         lab.translatesAutoresizingMaskIntoConstraints = false
+        lab.textAlignment = .center
         return lab
     }()
     
@@ -147,6 +158,9 @@ final class PadKey: UICollectionViewCell {
             label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
+        
+        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.borderWidth = 3.0
     }
     
     required init?(coder: NSCoder) {
