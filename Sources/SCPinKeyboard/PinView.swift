@@ -35,21 +35,30 @@ public class PinView: UIView {
         drawInputFrames()
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength - 1)) / CGFloat(pinLength)
+        let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
+        let dy = (frame.height - sideLength) / 2.0
+        inputViews.enumerated().forEach { i, view in
+            view.frame = CGRect(x: (sideLength + spaceBetweenPinViews) * CGFloat(i),
+            y: dy, width: sideLength, height: sideLength)
+        }
+    }
+    
     public func setPinLength(_ length:Int) {
         pinLength = length
     }
     
     private func drawInputFrames() {
         
-        let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength - 1)) / CGFloat(pinLength)
-        let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
-        let dy = (frame.height - sideLength) / 2.0
+        
         
         inputViews.removeAll()
         
         for i in 0 ..< pinLength {
-            let iView = SecretInputDot(frame: CGRect(x: (sideLength + spaceBetweenPinViews) * CGFloat(i),
-                                                      y: dy, width: sideLength, height: sideLength))
+            let iView = SecretInputDot(frame: .zero)
             inputViews.append(iView)
             addSubview(iView)
         }
