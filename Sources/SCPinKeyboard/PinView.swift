@@ -52,12 +52,10 @@ public class PinView: UIView {
     }
     
     private func drawInputFrames() {
-        
-        
-        
+    
         inputViews.removeAll()
-        
-        for i in 0 ..< pinLength {
+        let range = 0 ..< pinLength
+        range.forEach { _ in
             let iView = SecretInputDot(frame: .zero)
             inputViews.append(iView)
             addSubview(iView)

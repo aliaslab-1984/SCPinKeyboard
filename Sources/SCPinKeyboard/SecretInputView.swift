@@ -28,22 +28,25 @@ public class SecretInputDot: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
+    public override func draw(_ rect: CGRect) {
         
-        let mask = CAShapeLayer()
-        let path = UIBezierPath(
-            roundedRect: bounds,
-            byRoundingCorners: [.topLeft, .topRight, .bottomLeft, .bottomRight],
-            cornerRadii: CGSize(width: self.frame.height / 2, height: self.frame.height / 2)
-        )
-        mask.path = path.cgPath
-        self.layer.mask = mask
+        if self.isOn {
+            theme.accentColor.setFill()
+        } else {
+            UIColor.clear.setFill()
+        }
+        theme.accentColor.setStroke()
+
+        let circlePath = UIBezierPath(ovalIn: CGRect(x: 2, y: 2, width: rect.width - 2*2, height: rect.height - 2*2))
+        circlePath.lineWidth = 2
+
+        circlePath.stroke()
+        circlePath.fill()
     }
     
     public func toggle(_ to: Bool) {
         self.isOn = to
-        self.backgroundColor = to ? self.theme.accentColor : .clear
+        self.setNeedsDisplay()
     }
     
 }
