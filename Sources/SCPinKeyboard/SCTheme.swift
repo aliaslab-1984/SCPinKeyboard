@@ -14,6 +14,7 @@ public protocol SCTheme {
     
     var backgroundColor: UIColor { get }
     var accentColor: UIColor { get }
+    var textColor: UIColor { get }
     
 }
 
@@ -26,12 +27,22 @@ extension SCTheme {
 
 public struct DefaultTheme: SCTheme {
     
-    public var backgroundColor: UIColor = .clear
-    public var accentColor: UIColor = .blue
+    public var backgroundColor: UIColor
+    public var accentColor: UIColor
+    public var textColor: UIColor
     
     public init() {
         self.backgroundColor = UIColor.lightGray
-        self.accentColor = .blue
+        if #available(iOS 13.0, *) {
+            self.accentColor = .systemBlue
+        } else {
+            self.accentColor = .blue
+        }
+        if #available(iOS 13.0, *) {
+            self.textColor = .label
+        } else {
+            self.textColor = .darkGray
+        }
     }
 }
 

@@ -82,6 +82,7 @@ final class PadKey: UICollectionViewCell {
         let lab = UILabel()
         lab.translatesAutoresizingMaskIntoConstraints = false
         lab.textAlignment = .center
+        lab.font = UIFont.boldSystemFont(ofSize: 18)
         return lab
     }()
     
