@@ -60,6 +60,7 @@ public class CustomSCKeyboard: UIView {
         constraintCollectionView()
         
         collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     private func constraintCollectionView() {
