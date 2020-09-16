@@ -44,6 +44,8 @@ public class PinView: UIView {
         let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
         
         let startPoint = (frame.width - sideLength) / 2.0
+        
+        print(startPoint, frame.width)
         let dy = (frame.height - sideLength) / 2.0
         inputViews.enumerated().forEach { i, view in
             view.frame = CGRect(x: startPoint + (sideLength + spaceBetweenPinViews) * CGFloat(i),
