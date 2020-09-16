@@ -38,8 +38,9 @@ public class PinView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        let dotsWidth = CGFloat(pinLength) * spaceBetweenPinViews * CGFloat(pinLength + 2)
-        let startPoint = (frame.width - dotsWidth) / 2.0
+        let dotsWidth = CGFloat(pinLength) * CGFloat(pinLength)
+        let spacesWidth = CGFloat(pinLength * 2) * spaceBetweenPinViews
+        let startPoint = (frame.width - dotsWidth + spacesWidth) / 2.0
         
         let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength - 1)) / CGFloat(pinLength)
         let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
