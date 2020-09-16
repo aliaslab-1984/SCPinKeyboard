@@ -35,7 +35,7 @@ public class PinView: UIView {
         drawInputFrames()
     }
     
-    func setPinLength(_ length:Int) {
+    public func setPinLength(_ length:Int) {
         pinLength = length
     }
     
@@ -68,11 +68,11 @@ public class PinView: UIView {
         }
     }
     
-    func setDelegate(_ delegate: PinValidator?) {
+    public func setDelegate(_ delegate: PinValidator?) {
         self.delegate = delegate
     }
     
-    func reset() {
+    public func reset() {
         
         pinBuffer = ""
         for pinView in inputViews {
@@ -80,14 +80,15 @@ public class PinView: UIView {
         }
     }
     
-    func pinCounter() -> Int {
+    public func pinCounter() -> Int {
         return pinBuffer.count
     }
-    func getPin() -> String {
+    
+    public func getPin() -> String {
         return pinBuffer
     }
     
-    func errorAnimation() {
+    public func errorAnimation() {
         
         let origin = frame.origin
         frame.origin = CGPoint(x: origin.x - 12, y: origin.y)
