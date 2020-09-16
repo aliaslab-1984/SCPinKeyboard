@@ -30,7 +30,7 @@ public struct DefaultTheme: SCTheme {
     public var accentColor: UIColor = .blue
     
     public init() {
-        self.backgroundColor = .clear
+        self.backgroundColor = UIColor.lightGray
         self.accentColor = .blue
     }
 }

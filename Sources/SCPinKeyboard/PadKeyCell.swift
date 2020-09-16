@@ -115,6 +115,8 @@ final class PadKey: UICollectionViewCell {
             label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
+        
+        self.contentView.backgroundColor = theme.backgroundColor
     }
     
     
