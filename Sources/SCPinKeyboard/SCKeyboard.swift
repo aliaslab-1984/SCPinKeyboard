@@ -47,6 +47,7 @@ public class CustomSCKeyboard: UIView {
         let collectioView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectioView.isScrollEnabled = false
         collectioView.isScrollEnabled = false
+        collectioView.translatesAutoresizingMaskIntoConstraints = false
         return collectioView
     }()
     
