@@ -48,6 +48,7 @@ public class CustomSCKeyboard: UIView {
         collectioView.isScrollEnabled = false
         collectioView.isScrollEnabled = false
         collectioView.translatesAutoresizingMaskIntoConstraints = false
+        collectioView.backgroundColor = .clear
         return collectioView
     }()
     
