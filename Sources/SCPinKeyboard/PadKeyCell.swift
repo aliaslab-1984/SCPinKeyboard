@@ -53,6 +53,8 @@ final class PadKey: UICollectionViewCell {
         self.contentView.layer.addSublayer(myLayer)
         myLayer.path = self.pathForCorner(corner: cornerType).cgPath
         myLayer.borderColor = theme.accentColor.cgColor
+        myLayer.fillColor = UIColor.clear.cgColor
+        myLayer.borderWidth = 2
     }
     
     private func pathForCorner(corner: Corner) -> UIBezierPath {
