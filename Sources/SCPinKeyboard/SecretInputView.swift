@@ -18,7 +18,7 @@ public class SecretInputDot: UIView {
     public init(frame: CGRect, theme: SCTheme = DefaultTheme()) {
         self.theme = theme
         super.init(frame: .zero)
-        
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
