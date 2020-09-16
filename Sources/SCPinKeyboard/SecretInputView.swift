@@ -19,9 +19,6 @@ public class SecretInputDot: UIView {
         self.theme = theme
         super.init(frame: .zero)
         
-        self.layer.borderColor = theme.accentColor.cgColor
-        self.layer.borderWidth = 2
-        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +32,7 @@ public class SecretInputDot: UIView {
         } else {
             UIColor.clear.setFill()
         }
-        //theme.accentColor.setStroke()
+        theme.accentColor.setStroke()
 
         let circlePath = UIBezierPath(ovalIn: CGRect(x: 2, y: 2, width: rect.width - 2*2, height: rect.height - 2*2))
         circlePath.lineWidth = 2
