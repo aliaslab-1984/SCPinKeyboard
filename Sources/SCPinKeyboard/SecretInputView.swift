@@ -23,27 +23,25 @@ public class SecretInputView: UIView {
         tick = SecretInputView.circleView(with: radius, color: .blue)
         super.init(frame: frame)
         
-        backgroundColor = UIColor.clear
-
+        backgroundColor = UIColor.red
         tick.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tick)
         
-        if let anAttribute = NSLayoutConstraint.Attribute(rawValue: 0) {
-            addConstraint(NSLayoutConstraint(item: tick, attribute: .height,
-                                             relatedBy: .equal, toItem: nil,
-                                             attribute: anAttribute, multiplier: 1,
-                                             constant: 2 * radius))
-            addConstraint(NSLayoutConstraint(item: tick, attribute: .width,
-                                             relatedBy: .equal, toItem: nil,
-                                             attribute: anAttribute, multiplier: 1,
-                                             constant: 2 * radius))
+        if let _ = NSLayoutConstraint.Attribute(rawValue: 0) {
+            
+            NSLayoutConstraint.activate(
+                [
+                    tick.heightAnchor.constraint(equalToConstant: radius * 2),
+                    tick.widthAnchor.constraint(equalToConstant: radius * 2)
+                ]
+            )
         }
-        addConstraint(NSLayoutConstraint(item: tick, attribute: .centerY,
-                                         relatedBy: .equal, toItem: self,
-                                         attribute: .centerY, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: tick, attribute: .centerX,
-                                         relatedBy: .equal, toItem: self,
-                                         attribute: .centerX, multiplier: 1, constant: 0))
+        
+        NSLayoutConstraint.activate([
+            tick.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            tick.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+        
     }
     
     public override func draw(_ rect: CGRect) {
