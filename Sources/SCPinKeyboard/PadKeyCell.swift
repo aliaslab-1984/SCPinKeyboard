@@ -49,7 +49,7 @@ final class PadKey: UICollectionViewCell {
         
         let myLayer = CAShapeLayer()
         
-        self.contentView.layer.addSublayer(layer)
+        self.contentView.layer.addSublayer(myLayer)
         myLayer.path = self.pathForCorner(corner: cornerType).cgPath
         myLayer.borderColor = theme.accentColor.cgColor
     }
