@@ -88,9 +88,10 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var width = collectionView.frame.width / 3
-        let height = collectionView.frame.height / 4
+        var height = collectionView.frame.height / 4
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             width -= layout.minimumInteritemSpacing * 2
+            height -= layout.minimumLineSpacing * 2
         }
         return .init(width: width, height: height)
     }
@@ -114,11 +115,11 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return 2
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 2
     }
 }
 
