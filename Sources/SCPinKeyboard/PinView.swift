@@ -43,7 +43,7 @@ public class PinView: UIView {
         let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength - 1)) / CGFloat(pinLength)
         let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
         
-        let startPoint = (frame.width - sideLength) / 2.0
+        let startPoint = (frame.width - sideLength) / 4.0
         
         print(startPoint, frame.width)
         let dy = (frame.height - sideLength) / 2.0
