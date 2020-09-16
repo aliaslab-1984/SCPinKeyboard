@@ -133,6 +133,13 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
         
         if indexPath.item < 9 {
             cella.configure(with: String(indexPath.item + 1))
+            if indexPath.item == 0 {
+                cella.roundCorners(corners: .upLeft)
+            } else if indexPath.item == 2 {
+                cella.roundCorners(corners: .upRight)
+            } else {
+                cella.roundCorners(corners: .none)
+            }
         } else {
             if indexPath.item == 9 {
                 cella.configure(with: "")

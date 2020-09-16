@@ -13,6 +13,84 @@ final class PadKey: UICollectionViewCell {
     
     static let reuseid = "CollectionCellKeyReuseID"
     
+    public var cornerRadius: CGFloat = 12
+    
+    public enum Corner {
+        case upLeft
+        case upRight
+        case downRight
+        case downLeft
+        case none
+    }
+    
+    let theme = DefaultTheme()
+    
+    private var cornerType: Corner = .none
+    
+    public func roundCorners(corners: Corner) {
+        
+        self.cornerType = corners
+        if self.cornerRadius == 0 {
+            layer.mask = nil
+            return
+        }
+        
+        let path: UIBezierPath = self.pathForCorner(corner: corners)
+        let mask: CAShapeLayer = .init()
+        
+        mask.path = path.cgPath
+        layer.mask = mask
+        
+        setNeedsDisplay()
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        theme.backgroundColor.setFill()
+        theme.accentColor.setStroke()
+
+        let circlePath = self.pathForCorner(corner: cornerType)
+        circlePath.lineWidth = 1
+
+        circlePath.stroke()
+        circlePath.fill()
+    }
+    
+    private func pathForCorner(corner: Corner) -> UIBezierPath {
+        let path: UIBezierPath
+        switch corner {
+        case .upLeft:
+            path = UIBezierPath(
+                roundedRect: bounds,
+                byRoundingCorners: [.topLeft],
+                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+            )
+        case .upRight:
+            path = UIBezierPath(
+                roundedRect: bounds,
+                byRoundingCorners: [.topRight],
+                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+            )
+        case .downRight:
+            path = UIBezierPath(
+                roundedRect: bounds,
+                byRoundingCorners: [.bottomRight],
+                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+            )
+        case .downLeft:
+            path = UIBezierPath(
+                roundedRect: bounds,
+                byRoundingCorners: [.bottomLeft],
+                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+            )
+        case .none:
+            path = UIBezierPath(rect: frame)
+        }
+        
+        return path
+    }
+    
     private let label: UILabel = {
         let lab = UILabel()
         lab.translatesAutoresizingMaskIntoConstraints = false
@@ -37,10 +115,9 @@ final class PadKey: UICollectionViewCell {
             label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
-        
-        contentView.layer.borderColor = UIColor.gray.cgColor
-        contentView.layer.borderWidth = 3.0
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
