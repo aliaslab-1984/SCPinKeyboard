@@ -44,6 +44,8 @@ public class CustomSCKeyboard: UIView {
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 1
         let collectioView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectioView.isScrollEnabled = false
         collectioView.isScrollEnabled = false
@@ -111,15 +113,6 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
             number = indexPath.item
         }
         delegate?.userDidPressKey(keyValue: number)
-    }
-    
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
     }
 }
 
