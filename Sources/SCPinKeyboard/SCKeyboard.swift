@@ -93,8 +93,20 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Fix it
-        delegate?.userDidPressKey(keyValue: indexPath.item)
+        let number: Int
+        switch indexPath.item {
+        case 0..<9:
+            number = indexPath.item + 1
+        case 9:
+            number = -2
+        case 10:
+            number = 0
+        case 11:
+            number = -1
+        default:
+            number = indexPath.item
+        }
+        delegate?.userDidPressKey(keyValue: number)
     }
     
     
