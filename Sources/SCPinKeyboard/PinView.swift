@@ -17,7 +17,7 @@ public class PinView: UIView {
     
     private let spaceBetweenPinViews: CGFloat = 8
     
-    private var inputViews = [SecretInputView]()
+    private var inputViews = [SecretInputDot]()
     private var pinBuffer = ""
     
     private var pinLength = 6
@@ -48,7 +48,7 @@ public class PinView: UIView {
         inputViews.removeAll()
         
         for i in 0 ..< pinLength {
-            let iView = SecretInputView(frame: CGRect(x: (sideLength + spaceBetweenPinViews) * CGFloat(i),
+            let iView = SecretInputDot(frame: CGRect(x: (sideLength + spaceBetweenPinViews) * CGFloat(i),
                                                       y: dy, width: sideLength, height: sideLength))
             inputViews.append(iView)
             addSubview(iView)
@@ -60,11 +60,7 @@ public class PinView: UIView {
         if marked >= 0 && marked < inputViews.count {
             
             let toChange = inputViews[marked]
-            if toChange.isOn() {
-                toChange.tickOff()
-            } else {
-                toChange.tickOn()
-            }
+            toChange.toggle(!toChange.isOn)
         }
     }
     
@@ -76,7 +72,7 @@ public class PinView: UIView {
         
         pinBuffer = ""
         for pinView in inputViews {
-            pinView.tickOff()
+            pinView.toggle(false)
         }
     }
     

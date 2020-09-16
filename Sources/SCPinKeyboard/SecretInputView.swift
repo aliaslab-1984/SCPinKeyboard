@@ -9,6 +9,45 @@
 #if canImport(UIKit)
 import UIKit
 
+public class SecretInputDot: UIView {
+    
+    public var theme: SCTheme
+    
+    private (set) var isOn = false
+    
+    public init(frame: CGRect, theme: SCTheme = DefaultTheme()) {
+        self.theme = theme
+        super.init(frame: .zero)
+        
+        self.layer.borderColor = theme.accentColor.cgColor
+        self.layer.borderWidth = 2
+        self.backgroundColor = .clear
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let mask = CAShapeLayer()
+        let path = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: [.topLeft, .topRight, .bottomLeft, .bottomRight],
+            cornerRadii: CGSize(width: self.frame.height / 2, height: self.frame.height / 2)
+        )
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
+    public func toggle(_ to: Bool) {
+        self.isOn = to
+        self.backgroundColor = to ? self.theme.accentColor : .clear
+    }
+    
+}
+
 public class SecretInputView: UIView {
     
     private let tick: UIView

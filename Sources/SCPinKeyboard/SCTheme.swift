@@ -24,10 +24,15 @@ extension SCTheme {
     }
 }
 
-struct DefaultTheme: SCTheme {
+public struct DefaultTheme: SCTheme {
     
-    var backgroundColor: UIColor = .clear
-    var accentColor: UIColor = .blue
+    public var backgroundColor: UIColor = .clear
+    public var accentColor: UIColor = .blue
+    
+    public init() {
+        self.backgroundColor = .clear
+        self.accentColor = .blue
+    }
 }
 
 #endif
