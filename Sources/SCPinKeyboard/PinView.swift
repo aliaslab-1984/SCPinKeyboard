@@ -38,11 +38,13 @@ public class PinView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
+        let startPoint = (frame.width - inputViews.count * spaceBetweenPinViews * CGFloat(pinLength)) / 2
+        
         let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength - 1)) / CGFloat(pinLength)
         let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
         let dy = (frame.height - sideLength) / 2.0
         inputViews.enumerated().forEach { i, view in
-            view.frame = CGRect(x: (sideLength + spaceBetweenPinViews) * CGFloat(i),
+            view.frame = CGRect(x: startPoint + (sideLength + spaceBetweenPinViews) * CGFloat(i),
             y: dy, width: sideLength, height: sideLength)
         }
     }
