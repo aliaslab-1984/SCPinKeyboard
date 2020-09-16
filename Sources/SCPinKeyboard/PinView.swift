@@ -30,6 +30,11 @@ public class PinView: UIView {
         drawInputFrames()
     }
     
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        drawInputFrames()
+    }
+    
     func setPinLength(_ length:Int) {
         pinLength = length
     }
