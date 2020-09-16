@@ -49,10 +49,14 @@ public class PinView: UIView {
     
     public func setPinLength(_ length:Int) {
         pinLength = length
+        drawInputFrames()
     }
     
     private func drawInputFrames() {
     
+        inputViews.forEach {
+            $0.removeFromSuperview()
+        }
         inputViews.removeAll()
         let range = 0 ..< pinLength
         range.forEach { _ in
