@@ -44,17 +44,14 @@ final class PadKey: UICollectionViewCell {
         setNeedsDisplay()
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        theme.backgroundColor.setFill()
-        theme.accentColor.setStroke()
-
-        let circlePath = self.pathForCorner(corner: cornerType)
-        circlePath.lineWidth = 1
-
-        circlePath.stroke()
-        circlePath.fill()
+        let myLayer = CAShapeLayer()
+        
+        self.contentView.layer.addSublayer(layer)
+        myLayer.path = self.pathForCorner(corner: cornerType).cgPath
+        myLayer.borderColor = theme.accentColor.cgColor
     }
     
     private func pathForCorner(corner: Corner) -> UIBezierPath {
