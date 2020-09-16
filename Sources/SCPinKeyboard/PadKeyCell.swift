@@ -30,7 +30,7 @@ final class PadKey: UICollectionViewCell {
     public func roundCorners(corners: Corner) {
         
         self.cornerType = corners
-        if self.cornerRadius == 0 {
+        guard corners != .none, cornerRadius != 0 else {
             layer.mask = nil
             return
         }
