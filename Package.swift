@@ -24,7 +24,7 @@ let package = Package(
             dependencies: []),
         .target(name: "Shared",
                 resources: [
-                    .copy("Resources")
+                    .process("Resources")
                 ]),
         .testTarget(
             name: "SCPinKeyboardTests",
