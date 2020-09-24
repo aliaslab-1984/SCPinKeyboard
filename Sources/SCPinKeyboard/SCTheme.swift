@@ -32,7 +32,12 @@ public struct DefaultTheme: SCTheme {
     public var textColor: UIColor
     
     public init() {
-        self.backgroundColor = UIColor.lightGray
+        
+        if #available(iOS 13.0, *) {
+            self.backgroundColor = .secondarySystemFill
+        } else {
+            self.backgroundColor = UIColor.lightGray
+        }
         if #available(iOS 13.0, *) {
             self.accentColor = .systemBlue
         } else {
