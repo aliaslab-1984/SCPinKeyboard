@@ -15,10 +15,12 @@ public protocol PinValidator: class {
 
 public class PinView: UIView {
     
-    private let spaceBetweenPinViews: CGFloat = 8
+    private var spaceBetweenPinViews: CGFloat = 8
     
     private var inputViews = [SecretInputDot]()
     private var pinBuffer = ""
+    
+    private let verticalPadding: CGFloat = 8
     
     private var pinLength = 6
     
@@ -38,16 +40,18 @@ public class PinView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        let sideWidth = (frame.width - spaceBetweenPinViews * CGFloat(pinLength)) / CGFloat(pinLength)
-        let sideLength = floor(min(sideWidth, frame.height))        // floor avoids border on some devices
-        
-        let startPoint = (frame.width - sideLength + spaceBetweenPinViews) / 4.0
-        
-        print(startPoint, frame.width)
+        let floatLenght = CGFloat(pinLength)
+        let subdivision = frame.width - spaceBetweenPinViews * floatLenght
+        let sideWidth = subdivision / floatLenght
+        let sideLength = floor(min(sideWidth, frame.height - verticalPadding)) // floor avoids border on some devices
+        let remaningSpace = frame.width - (sideLength / 2) - spaceBetweenPinViews - sideLength * floatLenght
         let dy = (frame.height - sideLength) / 2.0
         inputViews.enumerated().forEach { i, view in
-            view.frame = CGRect(x: startPoint + (sideLength + spaceBetweenPinViews) * CGFloat(i),
-            y: dy, width: sideLength, height: sideLength)
+            let xValue = (remaningSpace / 2) + (sideLength + spaceBetweenPinViews) * CGFloat(i)
+            view.frame = CGRect(x: xValue,
+                                y: dy,
+                                width: sideLength,
+                                height: sideLength)
         }
     }
     

@@ -84,6 +84,11 @@ public class CustomSCKeyboard: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func layoutSubviews() {
+        collectionView.collectionViewLayout.invalidateLayout()
+        super.layoutSubviews()
+        collectionView.reloadData()
+    }
 }
 
 extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
