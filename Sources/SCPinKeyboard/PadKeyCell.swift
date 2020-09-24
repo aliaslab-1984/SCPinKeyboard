@@ -96,17 +96,21 @@ final class PadKey: UICollectionViewCell {
         super.init(frame: frame)
         
         self.contentView.addSubview(label)
+        self.contentView.addSubview(image)
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+            label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            image.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
         
         self.contentView.backgroundColor = theme.backgroundColor
     }
-    
     
     
     required init?(coder: NSCoder) {
@@ -114,7 +118,12 @@ final class PadKey: UICollectionViewCell {
     }
     
     public func configure(with item: String) {
-        label.text = item
+        if item == "del" {
+            let image = UIImage(named: "icon_blue", in: Bundle.module, compatibleWith: nil)
+            self.image.image = image
+        } else {
+            label.text = item
+        }
     }
 }
 
