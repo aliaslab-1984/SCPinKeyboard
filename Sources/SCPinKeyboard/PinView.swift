@@ -15,6 +15,8 @@ public protocol PinValidator: class {
 
 public class PinView: UIView {
     
+    private var theme: SCTheme = DefaultTheme()
+    
     private var spaceBetweenPinViews: CGFloat = 8
     
     private var inputViews = [SecretInputDot]()
@@ -34,6 +36,11 @@ public class PinView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        drawInputFrames()
+    }
+    
+    public func setTheme(_ scTheme: SCTheme) {
+        self.theme = scTheme
         drawInputFrames()
     }
     
@@ -69,7 +76,7 @@ public class PinView: UIView {
         inputViews.removeAll()
         let range = 0 ..< pinLength
         range.forEach { _ in
-            let iView = SecretInputDot(frame: .zero)
+            let iView = SecretInputDot(frame: .zero, theme: theme)
             inputViews.append(iView)
             addSubview(iView)
         }
