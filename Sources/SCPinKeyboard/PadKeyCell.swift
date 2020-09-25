@@ -122,13 +122,14 @@ final class PadKey: UICollectionViewCell {
         if item.0 == "del" {
             let image = UIImage(named: "icon_blue")
             self.image.image = image?.withRenderingMode(.alwaysTemplate)
-            self.image.tintColor = theme.textColor
         } else {
             label.text = item.0
         }
         
         self.theme = item.1
         self.contentView.backgroundColor = self.theme.backgroundColor
+        self.label.textColor = self.theme.textColor
+        self.image.tintColor = self.theme.textColor
     }
     
     override func prepareForReuse() {
