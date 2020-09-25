@@ -42,6 +42,8 @@ public class CustomSCKeyboard: UIView {
     
     private weak var delegate: SCKeyboardDelegate?
     
+    private var theme: SCTheme = DefaultTheme()
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 1
@@ -119,6 +121,11 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         }
         delegate?.userDidPressKey(keyValue: number)
     }
+    
+    public func setTheme(_ theme: SCTheme) {
+        self.theme = theme
+        collectionView.reloadData()
+    }
 }
 
 extension CustomSCKeyboard: UICollectionViewDataSource {
@@ -134,14 +141,14 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
         }
         
         if indexPath.item < 9 {
-            cella.configure(with: String(indexPath.item + 1))
+            cella.configure(with: (String(indexPath.item + 1), theme))
         } else {
             if indexPath.item == 9 {
-                cella.configure(with: "")
+                cella.configure(with: ("", theme))
             } else if indexPath.item == 10 {
-                cella.configure(with: String("0"))
+                cella.configure(with: ("0", theme))
             } else {
-                cella.configure(with: "del")
+                cella.configure(with: ("del", theme))
             }
         }
         

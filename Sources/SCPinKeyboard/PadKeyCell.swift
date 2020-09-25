@@ -23,7 +23,7 @@ final class PadKey: UICollectionViewCell {
         case none
     }
     
-    let theme = DefaultTheme()
+    private var theme: SCTheme = DefaultTheme()
     
     private var cornerType: Corner = .none
     
@@ -118,14 +118,17 @@ final class PadKey: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(with item: String) {
-        if item == "del" {
+    public func configure(with item: (String, SCTheme)) {
+        if item.0 == "del" {
             let image = UIImage(named: "icon_blue")
             self.image.image = image?.withRenderingMode(.alwaysTemplate)
             self.image.tintColor = theme.textColor
         } else {
-            label.text = item
+            label.text = item.0
         }
+        
+        self.theme = item.1
+        self.contentView.backgroundColor = self.theme.backgroundColor
     }
     
     override func prepareForReuse() {
