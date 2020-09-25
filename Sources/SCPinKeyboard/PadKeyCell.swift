@@ -88,6 +88,7 @@ final class PadKey: UICollectionViewCell {
     
     private let image: UIImageView = {
         let lab = UIImageView()
+        lab.contentMode = .scaleAspectFit
         lab.translatesAutoresizingMaskIntoConstraints = false
         return lab
     }()
@@ -103,10 +104,10 @@ final class PadKey: UICollectionViewCell {
             label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            image.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+            image.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            image.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
+            image.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
         ])
         
         self.contentView.backgroundColor = theme.backgroundColor
@@ -119,11 +120,19 @@ final class PadKey: UICollectionViewCell {
     
     public func configure(with item: String) {
         if item == "del" {
-            let image = UIImage(named: "icon_blue", in: Bundle.module, compatibleWith: nil)
-            self.image.image = image
+            let image = UIImage(named: "icon_blue")
+            self.image.image = image?.withRenderingMode(.alwaysTemplate)
+            self.image.tintColor = theme.textColor
         } else {
             label.text = item
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        label.text = nil
+        image.image = nil
     }
 }
 

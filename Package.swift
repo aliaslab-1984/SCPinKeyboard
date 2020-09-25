@@ -22,10 +22,6 @@ let package = Package(
         .target(
             name: "SCPinKeyboard",
             dependencies: []),
-        .target(name: "Shared",
-                resources: [
-                    .process("Resources")
-                ]),
         .testTarget(
             name: "SCPinKeyboardTests",
             dependencies: ["SCPinKeyboard"]),
