@@ -42,7 +42,7 @@ public class CustomSCKeyboard: UIView {
     
     private weak var delegate: SCKeyboardDelegate?
     
-    private var theme: SCTheme = DefaultTheme()
+    private var configuration: SCConfiguration
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -56,8 +56,13 @@ public class CustomSCKeyboard: UIView {
         return collectioView
     }()
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
+    public init(configuration: SCConfiguration?) {
+        if let conf = configuration {
+            self.configuration = conf
+        } else {
+            self.configuration = SCDefaultConfiguration()
+        }
+        super.init(frame: .zero)
         
         self.addSubview(collectionView)
         
@@ -123,7 +128,7 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     }
     
     public func setTheme(_ theme: SCTheme) {
-        self.theme = theme
+        self.configuration.theme = theme
         collectionView.reloadData()
     }
 }
@@ -141,14 +146,14 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
         }
         
         if indexPath.item < 9 {
-            cella.configure(with: (String(indexPath.item + 1), theme))
+            cella.configure(with: (String(indexPath.item + 1), configuration))
         } else {
             if indexPath.item == 9 {
-                cella.configure(with: ("", theme))
+                cella.configure(with: ("", configuration))
             } else if indexPath.item == 10 {
-                cella.configure(with: ("0", theme))
+                cella.configure(with: ("0", configuration))
             } else {
-                cella.configure(with: ("del", theme))
+                cella.configure(with: ("del", configuration))
             }
         }
         

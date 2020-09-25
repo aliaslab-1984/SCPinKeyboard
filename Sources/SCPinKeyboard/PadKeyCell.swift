@@ -13,8 +13,6 @@ final class PadKey: UICollectionViewCell {
     
     static let reuseid = "CollectionCellKeyReuseID"
     
-    public var cornerRadius: CGFloat = 12
-    
     public enum Corner {
         case upLeft
         case upRight
@@ -23,14 +21,14 @@ final class PadKey: UICollectionViewCell {
         case none
     }
     
-    private var theme: SCTheme = DefaultTheme()
+    private var configuration: SCConfiguration = SCDefaultConfiguration()
     
     private var cornerType: Corner = .none
     
     public func roundCorners(corners: Corner) {
         
         self.cornerType = corners
-        guard corners != .none, cornerRadius != 0 else {
+        guard corners != .none, configuration.cornerRadius != 0 else {
             layer.mask = nil
             return
         }
@@ -51,25 +49,25 @@ final class PadKey: UICollectionViewCell {
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.topLeft],
-                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
             )
         case .upRight:
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.topRight],
-                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
             )
         case .downRight:
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.bottomRight],
-                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
             )
         case .downLeft:
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.bottomLeft],
-                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
             )
         case .none:
             path = UIBezierPath(rect: frame)
@@ -110,7 +108,7 @@ final class PadKey: UICollectionViewCell {
             image.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
         ])
         
-        self.contentView.backgroundColor = theme.backgroundColor
+        self.contentView.backgroundColor = configuration.theme.backgroundColor
     }
     
     
@@ -118,7 +116,7 @@ final class PadKey: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(with item: (String, SCTheme)) {
+    public func configure(with item: (String, SCConfiguration)) {
         if item.0 == "del" {
             let image = UIImage(named: "icon_blue")
             self.image.image = image?.withRenderingMode(.alwaysTemplate)
@@ -126,10 +124,11 @@ final class PadKey: UICollectionViewCell {
             label.text = item.0
         }
         
-        self.theme = item.1
-        self.contentView.backgroundColor = self.theme.backgroundColor
-        self.label.textColor = self.theme.textColor
-        self.image.tintColor = self.theme.textColor
+        self.configuration = item.1
+        self.contentView.backgroundColor = self.configuration.theme.backgroundColor
+        self.label.textColor = self.configuration.theme.textColor
+        self.label.font = self.configuration.font
+        self.image.tintColor = self.configuration.theme.textColor
     }
     
     override func prepareForReuse() {
