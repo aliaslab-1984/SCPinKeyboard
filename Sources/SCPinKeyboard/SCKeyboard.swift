@@ -9,7 +9,7 @@
 #if canImport(UIKit)
 import UIKit
 
-public protocol SCKeyboardDelegate: class {
+public protocol SCKeyboardDelegate: AnyObject {
     
     func userDidPressKey(keyValue: Int)
 }
@@ -157,16 +157,22 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
             }
         }
         
-        if indexPath.item == 0 {
-            cella.roundCorners(corners: .upLeft)
-        } else if indexPath.item == 2 {
-            cella.roundCorners(corners: .upRight)
-        } else if indexPath.item == 9 {
-            cella.roundCorners(corners: .downLeft)
-        } else if indexPath.item == 11 {
-            cella.roundCorners(corners: .downRight)
+        if configuration.theme.cornerConfiguration == .edgeCorners {
+            if indexPath.item == 0 {
+                cella.roundCorners(.upLeft)
+            } else if indexPath.item == 2 {
+                cella.roundCorners(.upRight)
+            } else if indexPath.item == 9 {
+                cella.roundCorners(.downLeft)
+            } else if indexPath.item == 11 {
+                cella.roundCorners(.downRight)
+            } else {
+                cella.roundCorners(.none)
+            }
+        } else if configuration.theme.cornerConfiguration == .allCorners {
+            cella.roundCorners(.allCorners)
         } else {
-            cella.roundCorners(corners: .none)
+            cella.roundCorners(.none)
         }
         
         return cella

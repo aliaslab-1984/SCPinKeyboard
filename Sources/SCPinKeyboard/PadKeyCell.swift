@@ -13,27 +13,20 @@ final class PadKey: UICollectionViewCell {
     
     static let reuseid = "CollectionCellKeyReuseID"
     
-    public enum Corner {
-        case upLeft
-        case upRight
-        case downRight
-        case downLeft
-        case none
-    }
-    
     private var configuration: SCConfiguration = SCDefaultConfiguration()
     
     private var cornerType: Corner = .none
     
-    public func roundCorners(corners: Corner) {
+    public func roundCorners(_ corner: Corner) {
         
-        self.cornerType = corners
-        guard corners != .none, configuration.cornerRadius != 0 else {
+        self.cornerType = corner
+        guard corner != .none,
+              configuration.theme.cornerRadius != 0 else {
             layer.mask = nil
             return
         }
         
-        let path: UIBezierPath = self.pathForCorner(corner: corners)
+        let path: UIBezierPath = self.pathForCorner(corner: corner)
         let mask: CAShapeLayer = .init()
         
         mask.path = path.cgPath
@@ -49,25 +42,31 @@ final class PadKey: UICollectionViewCell {
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.topLeft],
-                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
+                cornerRadii: CGSize(width: configuration.theme.cornerRadius, height: configuration.theme.cornerRadius)
             )
         case .upRight:
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.topRight],
-                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
+                cornerRadii: CGSize(width: configuration.theme.cornerRadius, height: configuration.theme.cornerRadius)
             )
         case .downRight:
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.bottomRight],
-                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
+                cornerRadii: CGSize(width: configuration.theme.cornerRadius, height: configuration.theme.cornerRadius)
             )
         case .downLeft:
             path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.bottomLeft],
-                cornerRadii: CGSize(width: configuration.cornerRadius, height: configuration.cornerRadius)
+                cornerRadii: CGSize(width: configuration.theme.cornerRadius, height: configuration.theme.cornerRadius)
+            )
+        case .allCorners:
+            path = UIBezierPath(
+                roundedRect: bounds,
+                byRoundingCorners: [.bottomLeft, .bottomRight, .topLeft, .topRight],
+                cornerRadii: CGSize(width: configuration.theme.cornerRadius, height: configuration.theme.cornerRadius)
             )
         case .none:
             path = UIBezierPath(rect: frame)

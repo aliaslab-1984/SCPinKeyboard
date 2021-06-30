@@ -15,7 +15,7 @@ public class SecretInputDot: UIView {
     
     private (set) var isOn = false
     
-    public init(frame: CGRect, theme: SCTheme = DefaultTheme()) {
+    public init(frame: CGRect, theme: SCTheme = EdgedCornerTheme()) {
         self.theme = theme
         super.init(frame: .zero)
         self.backgroundColor = .clear

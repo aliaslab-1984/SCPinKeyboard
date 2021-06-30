@@ -9,13 +9,13 @@
 #if canImport(UIKit)
 import UIKit
 
-public protocol PinValidator: class {
+public protocol PinValidator: AnyObject {
     func validate()
 }
 
 public class PinView: UIView {
     
-    private var theme: SCTheme = DefaultTheme()
+    private var theme: SCTheme = EdgedCornerTheme()
     
     private var spaceBetweenPinViews: CGFloat = 8
     
