@@ -96,6 +96,10 @@ public class CustomSCKeyboard: UIView {
         super.layoutSubviews()
         collectionView.reloadData()
     }
+    
+    public func reloadKeyboardPad() {
+        collectionView.reloadData()
+    }
 }
 
 extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
