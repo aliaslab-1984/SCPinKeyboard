@@ -9,7 +9,7 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 
-enum PadItem {
+enum PadItem: Equatable {
     
     case number(number: String)
     case delete
@@ -22,6 +22,8 @@ final class PadKey: UICollectionViewCell {
     static let reuseid = "CollectionCellKeyReuseID"
     
     private var configuration: SCConfiguration = SCDefaultConfiguration()
+    
+    private var padItem: PadItem?
     
     private var cornerType: Corner = .none
     
@@ -95,6 +97,7 @@ final class PadKey: UICollectionViewCell {
         let lab = UIImageView()
         lab.contentMode = .scaleAspectFit
         lab.translatesAutoresizingMaskIntoConstraints = false
+        lab.layer.masksToBounds = false
         return lab
     }()
     
@@ -126,12 +129,13 @@ final class PadKey: UICollectionViewCell {
     public func configure(with item: (PadItem, SCConfiguration)) {
         let padItem = item.0
         let configuration = item.1
+        self.padItem = padItem
         switch padItem {
         case let .number(number):
             label.text = number
         case .delete:
             if #available(iOS 13, *) {
-                let image = UIImage(systemName: "delete.left")
+                let image = UIImage(systemName: "delete.left.fill")
                 self.image.image = image
             } else {
                 let image = UIImage(named: "icon_blue")
@@ -153,8 +157,24 @@ final class PadKey: UICollectionViewCell {
         self.contentView.backgroundColor = self.configuration.theme.backgroundColor
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
-        self.image.tintColor = self.configuration.theme.textColor
+        self.image.tintColor = padItem != .custom ? self.configuration.theme.textColor : self.configuration.theme.accentColor
+        if padItem == .custom {
+            self.image.backgroundColor = configuration.theme.textColor
+        } else {
+            self.image.backgroundColor = nil
+        }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if padItem == .custom {
+            image.layer.cornerRadius = image.frame.height / 2
+        } else {
+            image.layer.cornerRadius = 0
+        }
+    }
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()

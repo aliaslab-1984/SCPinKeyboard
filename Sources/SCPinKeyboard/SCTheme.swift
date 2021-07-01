@@ -17,7 +17,7 @@ public protocol SCTheme {
     var textColor: UIColor { get }
     var cornerConfiguration: CornerConfiguration { get }
     var cornerRadius: CGFloat { get }
-    
+    var interItemSpacing: CGSize { get set }
 }
 
 public enum CornerConfiguration {
@@ -42,6 +42,7 @@ public struct EdgedCornerTheme: SCTheme {
     public var textColor: UIColor
     public var cornerConfiguration: CornerConfiguration
     public var cornerRadius: CGFloat
+    public var interItemSpacing: CGSize
     
     public init() {
         
@@ -63,6 +64,7 @@ public struct EdgedCornerTheme: SCTheme {
         
         cornerConfiguration = .edgeCorners
         cornerRadius = 12.0
+        interItemSpacing = .init(width: 1, height: 1)
     }
 }
 
@@ -73,6 +75,8 @@ public struct AllRoundedCornersTheme: SCTheme {
     public var textColor: UIColor
     public var cornerConfiguration: CornerConfiguration
     public var cornerRadius: CGFloat
+    public var interItemSpacing: CGSize
+    
     
     public init() {
         
@@ -94,6 +98,7 @@ public struct AllRoundedCornersTheme: SCTheme {
         
         cornerConfiguration = .allCorners
         cornerRadius = 12.0
+        interItemSpacing = .init(width: 1, height: 1)
     }
 }
 

@@ -101,7 +101,7 @@ public class CustomSCKeyboard: UIView {
     
     public func updateConfiguration(with configuration: SCConfiguration) {
         self.configuration = configuration
-        reloadKeyboardPad()
+        self.setTheme(configuration.theme)
     }
     
     public func reloadKeyboardPad() {
@@ -111,7 +111,9 @@ public class CustomSCKeyboard: UIView {
 
 extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView,
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAt indexPath: IndexPath) -> CGSize {
         var width = collectionView.frame.width / 3
         var height = collectionView.frame.height / 4
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -141,6 +143,10 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     
     public func setTheme(_ theme: SCTheme) {
         self.configuration.theme = theme
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumInteritemSpacing = theme.interItemSpacing.height
+            layout.minimumLineSpacing = theme.interItemSpacing.width
+        }
         collectionView.reloadData()
     }
 }
@@ -148,7 +154,6 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
 extension CustomSCKeyboard: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return 12
     }
     
