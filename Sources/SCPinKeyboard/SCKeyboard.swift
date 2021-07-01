@@ -97,6 +97,11 @@ public class CustomSCKeyboard: UIView {
         collectionView.reloadData()
     }
     
+    public func updateConfiguration(with configuration: SCConfiguration) {
+        self.configuration = configuration
+        reloadKeyboardPad()
+    }
+    
     public func reloadKeyboardPad() {
         collectionView.reloadData()
     }
