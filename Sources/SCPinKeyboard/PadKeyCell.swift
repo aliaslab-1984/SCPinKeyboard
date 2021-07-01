@@ -186,7 +186,7 @@ final class PadKey: UICollectionViewCell {
             guard let sSelf = self else {
                 return
             }
-            sSelf.image.tintColor = enabled ? sSelf.configuration.theme.secondAccent : sSelf.configuration.theme.accentColor
+            sSelf.image.tintColor = enabled ? sSelf.configuration.theme.accentColor : sSelf.configuration.theme.secondAccent
             if sSelf.padItem == .custom {
                 sSelf.image.backgroundColor = enabled ? sSelf.configuration.theme.textColor : .lightText
             } else {
