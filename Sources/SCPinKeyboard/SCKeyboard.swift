@@ -151,7 +151,7 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
             if indexPath.item == 9 {
                 cella.configure(with: (.custom, configuration))
             } else if indexPath.item == 10 {
-                cella.configure(with: (.number(number: String(indexPath.item + 1)), configuration))
+                cella.configure(with: (.number(number: String(0)), configuration))
             } else {
                 cella.configure(with: (.delete, configuration))
             }

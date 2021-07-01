@@ -12,12 +12,17 @@ import UIKit
 public struct CustomButton {
     let text: String?
     let image: UIImage?
-    let name: String
+    
+    public init(text: String? = nil,
+                image: UIImage? = nil) {
+        self.text = text
+        self.image = image
+    }
 }
 
 public protocol SCConfiguration {
-    var font: UIFont {get set}
-    var theme: SCTheme {get set}
+    var font: UIFont { get set }
+    var theme: SCTheme { get set }
     var additionalButton: CustomButton? { get set }
 }
 
