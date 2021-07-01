@@ -130,8 +130,14 @@ final class PadKey: UICollectionViewCell {
         case let .number(number):
             label.text = number
         case .delete:
-            let image = UIImage(named: "icon_blue")
-            self.image.image = image?.withRenderingMode(.alwaysTemplate)
+            if #available(iOS 13, *) {
+                let image = UIImage(systemName: "delete.left")
+                self.image.image = image
+            } else {
+                let image = UIImage(named: "icon_blue")
+                self.image.image = image?.withRenderingMode(.alwaysTemplate)
+            }
+            
         case .custom:
             if let text = configuration.additionalButton?.text {
                 label.text = text
