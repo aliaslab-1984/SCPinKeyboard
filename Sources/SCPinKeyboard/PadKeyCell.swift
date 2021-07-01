@@ -144,6 +144,8 @@ final class PadKey: UICollectionViewCell {
                 self.image.image = image?.withRenderingMode(.alwaysTemplate)
             }
             
+            self.isEnabled = false
+            self.toggle(false)
         case .custom:
             if let text = configuration.additionalButton?.text {
                 label.text = text
