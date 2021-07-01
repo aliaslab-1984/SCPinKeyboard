@@ -83,6 +83,8 @@ public class CustomSCKeyboard: UIView {
         collectionView.register(PadKey.self, forCellWithReuseIdentifier: PadKey.reuseid)
     }
     
+    public var onCustomButtonPressed: (() -> Void)? = nil
+    
     public func setDelegate(_ delegate: SCKeyboardDelegate?) {
         self.delegate = delegate
     }
@@ -125,6 +127,7 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         case 0..<9:
             number = indexPath.item + 1
         case 9:
+            onCustomButtonPressed?()
             number = -2
         case 10:
             number = 0
