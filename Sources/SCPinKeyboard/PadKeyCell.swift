@@ -157,7 +157,7 @@ final class PadKey: UICollectionViewCell {
         self.contentView.backgroundColor = self.configuration.theme.backgroundColor
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
-        self.image.tintColor = padItem != .custom ? self.configuration.theme.textColor : self.configuration.theme.accentColor
+        self.image.tintColor = padItem != .custom ? self.configuration.theme.secondAccent : self.configuration.theme.accentColor
         if padItem == .custom {
             self.image.backgroundColor = configuration.theme.textColor
         } else {
@@ -174,7 +174,6 @@ final class PadKey: UICollectionViewCell {
             image.layer.cornerRadius = 0
         }
     }
-    
     
     override func prepareForReuse() {
         super.prepareForReuse()
