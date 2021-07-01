@@ -9,9 +9,16 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 
+public struct CustomButton {
+    let text: String?
+    let image: UIImage?
+    let name: String
+}
+
 public protocol SCConfiguration {
     var font: UIFont {get set}
     var theme: SCTheme {get set}
+    var additionalButton: CustomButton? { get set }
 }
 
 public struct SCDefaultConfiguration: SCConfiguration {
@@ -24,6 +31,7 @@ public struct SCDefaultConfiguration: SCConfiguration {
     
     public var font: UIFont = UIFont.boldSystemFont(ofSize: 18)
     public var theme: SCTheme = EdgedCornerTheme()
+    public var additionalButton: CustomButton?
     
 }
 

@@ -146,14 +146,14 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
         }
         
         if indexPath.item < 9 {
-            cella.configure(with: (String(indexPath.item + 1), configuration))
+            cella.configure(with: (.number(number: String(indexPath.item + 1)), configuration))
         } else {
             if indexPath.item == 9 {
-                cella.configure(with: ("", configuration))
+                cella.configure(with: (.custom, configuration))
             } else if indexPath.item == 10 {
-                cella.configure(with: ("0", configuration))
+                cella.configure(with: (.number(number: String(indexPath.item + 1)), configuration))
             } else {
-                cella.configure(with: ("del", configuration))
+                cella.configure(with: (.delete, configuration))
             }
         }
         

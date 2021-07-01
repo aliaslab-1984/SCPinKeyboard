@@ -9,6 +9,14 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 
+enum PadItem {
+    
+    case number(number: String)
+    case delete
+    case custom
+    
+}
+
 final class PadKey: UICollectionViewCell {
     
     static let reuseid = "CollectionCellKeyReuseID"
@@ -115,15 +123,27 @@ final class PadKey: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(with item: (String, SCConfiguration)) {
-        if item.0 == "del" {
+    public func configure(with item: (PadItem, SCConfiguration)) {
+        let padItem = item.0
+        let configuration = item.1
+        switch padItem {
+        case let .number(number):
+            label.text = number
+        case .delete:
             let image = UIImage(named: "icon_blue")
             self.image.image = image?.withRenderingMode(.alwaysTemplate)
-        } else {
-            label.text = item.0
+        case .custom:
+            if let text = configuration.additionalButton?.text {
+                label.text = text
+            } else if let imageName = configuration.additionalButton?.image {
+                self.image.image = imageName.withRenderingMode(.alwaysTemplate)
+            } else {
+                label.text = nil
+                self.image.image = nil
+            }
         }
         
-        self.configuration = item.1
+        self.configuration = configuration
         self.contentView.backgroundColor = self.configuration.theme.backgroundColor
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
