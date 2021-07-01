@@ -14,30 +14,6 @@ public protocol SCKeyboardDelegate: AnyObject {
     func userDidPressKey(keyValue: Int)
 }
 
-@IBDesignable
-public class SCKeyboard: UIView, NibLoadable {
-
-    private weak var delegate: SCKeyboardDelegate?
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupFromNib()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupFromNib()
-    }
-    
-    func setDelegate(_ delegate: SCKeyboardDelegate?) {
-        self.delegate = delegate
-    }
-
-    @IBAction func didPressedButton(_ sender: UIButton) {
-        delegate?.userDidPressKey(keyValue: sender.tag)
-    }
-}
-
 public class CustomSCKeyboard: UIView {
     
     private weak var delegate: SCKeyboardDelegate?
@@ -55,6 +31,8 @@ public class CustomSCKeyboard: UIView {
         collectioView.backgroundColor = .clear
         return collectioView
     }()
+    
+    private var characterCount: Int = 0
     
     public init(configuration: SCConfiguration?) {
         if let conf = configuration {
@@ -128,17 +106,33 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         switch indexPath.item {
         case 0..<9:
             number = indexPath.item + 1
+            characterCount += 1
         case 9:
             onCustomButtonPressed?()
             number = -2
         case 10:
             number = 0
+            characterCount += 1
         case 11:
             number = -1
+            characterCount -= 1
         default:
             number = indexPath.item
         }
+        
         delegate?.userDidPressKey(keyValue: number)
+        
+        guard collectionView.numberOfItems(inSection: 0) == 12,
+            let item = collectionView.cellForItem(at: IndexPath(item: 11, section: 0)) as? PadKey else {
+            return
+        }
+        
+        if characterCount <= 0 {
+            item.toggle(false)
+            characterCount = 0
+        } else {
+            item.toggle(true)
+        }
     }
     
     public func setTheme(_ theme: SCTheme) {

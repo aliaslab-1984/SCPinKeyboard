@@ -27,6 +27,8 @@ final class PadKey: UICollectionViewCell {
     
     private var cornerType: Corner = .none
     
+    private var isEnabled: Bool = true
+    
     public func roundCorners(_ corner: Corner) {
         
         self.cornerType = corner
@@ -158,7 +160,7 @@ final class PadKey: UICollectionViewCell {
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
         if image.image != nil {
-            self.image.tintColor = padItem != .custom ? self.configuration.theme.secondAccent : self.configuration.theme.accentColor
+            self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
             if padItem == .custom {
                 self.image.backgroundColor = configuration.theme.textColor
             } else {
@@ -166,6 +168,28 @@ final class PadKey: UICollectionViewCell {
             }
         } else {
             self.image.backgroundColor = nil
+        }
+    }
+    
+    func toggle(_ enabled: Bool) {
+        guard isEnabled != enabled else {
+            return
+        }
+        isEnabled = enabled
+        
+        guard image.image != nil else {
+            return
+        }
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            guard let sSelf = self else {
+                return
+            }
+            sSelf.image.tintColor = enabled ? sSelf.configuration.theme.secondAccent : sSelf.configuration.theme.accentColor
+            if sSelf.padItem == .custom {
+                sSelf.image.backgroundColor = enabled ? sSelf.configuration.theme.textColor : .lightText
+            } else {
+                sSelf.image.backgroundColor = nil
+            }
         }
     }
     
