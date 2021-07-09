@@ -168,6 +168,7 @@ final class PadKey: UICollectionViewCell {
             } else {
                 self.image.backgroundColor = nil
             }
+            layoutSubviews()
         } else {
             self.image.backgroundColor = nil
         }
