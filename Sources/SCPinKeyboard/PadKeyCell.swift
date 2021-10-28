@@ -137,11 +137,12 @@ final class PadKey: UICollectionViewCell {
             label.text = number
         case .delete:
             if #available(iOS 13, *) {
-                let image = UIImage(systemName: "delete.left.fill")
+                let image = UIImage(systemName: "delete.left.fill")?.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
                 self.image.image = image
             } else {
                 let image = UIImage(named: "icon_blue")
                 self.image.image = image?.withRenderingMode(.alwaysTemplate)
+                    .with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
             }
             
             self.isEnabled = false
@@ -150,7 +151,7 @@ final class PadKey: UICollectionViewCell {
             if let text = configuration.additionalButton?.text {
                 label.text = text
             } else if let imageName = configuration.additionalButton?.image {
-                self.image.image = imageName.withRenderingMode(.alwaysTemplate)
+                self.image.image = imageName.withRenderingMode(.alwaysTemplate).with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
             } else {
                 label.text = nil
                 self.image.image = nil
@@ -162,7 +163,7 @@ final class PadKey: UICollectionViewCell {
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
         if image.image != nil {
-            self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
+            self.image.tintColor = self.configuration.theme.accentColor
             if padItem == .custom {
                 self.image.backgroundColor = nil
             } else {
