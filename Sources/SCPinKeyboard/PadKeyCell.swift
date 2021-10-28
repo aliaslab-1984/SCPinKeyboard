@@ -152,7 +152,7 @@ final class PadKey: UICollectionViewCell {
                 self.image.image = imageName.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))?.withRenderingMode(.alwaysTemplate)
             } else {
                 label.text = nil
-                self.image.image = nil
+                image.image = nil
             }
         }
         
@@ -164,9 +164,14 @@ final class PadKey: UICollectionViewCell {
             self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
             if padItem == .custom {
                 self.image.backgroundColor = self.configuration.theme.textColor
+                self.image.layer.masksToBounds = true
+                self.image.layer.cornerRadius = image.frame.height / 4
             } else {
                 self.image.backgroundColor = nil
+                self.image.layer.cornerRadius = 0
+                self.image.layer.masksToBounds = false
             }
+            
             layoutSubviews()
         } else {
             self.image.backgroundColor = nil

@@ -165,6 +165,12 @@ extension CustomSCKeyboard: UICollectionViewDataSource {
                 cella.configure(with: (.number(number: String(0)), configuration))
             } else {
                 cella.configure(with: (.delete, configuration))
+                if characterCount <= 0 {
+                    cella.toggle(false)
+                    characterCount = 0
+                } else {
+                    cella.toggle(true)
+                }
             }
         }
         
