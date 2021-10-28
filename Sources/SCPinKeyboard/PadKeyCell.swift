@@ -164,10 +164,9 @@ final class PadKey: UICollectionViewCell {
         if image.image != nil {
             self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
             if padItem == .custom {
-                self.contentView.backgroundColor = self.configuration.theme.textColor
+                self.image.backgroundColor = self.configuration.theme.textColor
             } else {
                 self.image.backgroundColor = nil
-                self.contentView.backgroundColor = self.configuration.theme.backgroundColor
             }
             layoutSubviews()
         } else {
@@ -201,11 +200,11 @@ final class PadKey: UICollectionViewCell {
         super.layoutSubviews()
         
         if padItem == .custom {
-            self.layer.masksToBounds = true
-            self.layer.cornerRadius = image.frame.height / 2
+            self.image.layer.masksToBounds = true
+            self.image.layer.cornerRadius = image.frame.height / 2
         } else {
-            self.layer.cornerRadius = 0
-            self.layer.masksToBounds = false
+            self.image.layer.cornerRadius = 0
+            self.image.layer.masksToBounds = false
         }
     }
     
