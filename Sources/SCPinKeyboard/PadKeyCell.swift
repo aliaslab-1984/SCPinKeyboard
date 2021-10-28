@@ -99,7 +99,6 @@ final class PadKey: UICollectionViewCell {
         let lab = UIImageView()
         lab.contentMode = .scaleAspectFit
         lab.translatesAutoresizingMaskIntoConstraints = false
-        lab.layer.masksToBounds = false
         return lab
     }()
     
@@ -163,11 +162,12 @@ final class PadKey: UICollectionViewCell {
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
         if image.image != nil {
-            self.image.tintColor = self.configuration.theme.accentColor
+            self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
             if padItem == .custom {
-                self.image.backgroundColor = nil
+                self.contentView.backgroundColor = self.configuration.theme.textColor
             } else {
                 self.image.backgroundColor = nil
+                self.contentView.backgroundColor = self.configuration.theme.backgroundColor
             }
             layoutSubviews()
         } else {
@@ -201,9 +201,11 @@ final class PadKey: UICollectionViewCell {
         super.layoutSubviews()
         
         if padItem == .custom {
-            image.layer.cornerRadius = image.frame.height / 2
+            self.layer.masksToBounds = true
+            self.layer.cornerRadius = image.frame.height / 2
         } else {
-            image.layer.cornerRadius = 0
+            self.layer.cornerRadius = 0
+            self.layer.masksToBounds = false
         }
     }
     
