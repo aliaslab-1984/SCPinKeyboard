@@ -145,6 +145,7 @@ final class PadKey: UICollectionViewCell {
             
             self.isEnabled = false
             self.toggle(false)
+            image.tintColor = configuration.theme.secondAccent
         case .custom:
             if let text = configuration.additionalButton?.text {
                 label.text = text
@@ -166,6 +167,7 @@ final class PadKey: UICollectionViewCell {
                 self.image.backgroundColor = self.configuration.theme.textColor
                 self.image.layer.masksToBounds = true
                 self.image.layer.cornerRadius = image.frame.height / 4
+                self.image.setNeedsDisplay()
             } else {
                 self.image.backgroundColor = nil
                 self.image.layer.cornerRadius = 0
