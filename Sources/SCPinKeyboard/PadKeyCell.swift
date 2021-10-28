@@ -136,12 +136,11 @@ final class PadKey: UICollectionViewCell {
             label.text = number
         case .delete:
             if #available(iOS 13, *) {
-                let image = UIImage(systemName: "delete.left.fill")?.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
+                let image = UIImage(systemName: "delete.left.fill")
                 self.image.image = image
             } else {
                 let image = UIImage(named: "icon_blue")
                 self.image.image = image?.withRenderingMode(.alwaysTemplate)
-                    .with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
             }
             
             self.isEnabled = false
@@ -150,7 +149,7 @@ final class PadKey: UICollectionViewCell {
             if let text = configuration.additionalButton?.text {
                 label.text = text
             } else if let imageName = configuration.additionalButton?.image {
-                self.image.image = imageName.withRenderingMode(.alwaysTemplate).with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
+                self.image.image = imageName.withRenderingMode(.alwaysTemplate)
             } else {
                 label.text = nil
                 self.image.image = nil
@@ -165,6 +164,7 @@ final class PadKey: UICollectionViewCell {
             self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
             if padItem == .custom {
                 self.image.backgroundColor = self.configuration.theme.textColor
+                self.image.image = self.image.image?.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
             } else {
                 self.image.backgroundColor = nil
             }
@@ -201,7 +201,7 @@ final class PadKey: UICollectionViewCell {
         
         if padItem == .custom {
             self.image.layer.masksToBounds = true
-            self.image.layer.cornerRadius = image.frame.height / 2
+            self.image.layer.cornerRadius = image.frame.height / 4
         } else {
             self.image.layer.cornerRadius = 0
             self.image.layer.masksToBounds = false
