@@ -164,7 +164,7 @@ final class PadKey: UICollectionViewCell {
             self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
             if padItem == .custom {
                 self.image.backgroundColor = self.configuration.theme.textColor
-                self.image.image = self.image.image?.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
+                self.image.image = self.image.image?.withRenderingMode(.alwaysTemplate)?.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))
             } else {
                 self.image.backgroundColor = nil
             }
