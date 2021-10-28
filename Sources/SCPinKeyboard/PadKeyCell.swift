@@ -149,7 +149,7 @@ final class PadKey: UICollectionViewCell {
             if let text = configuration.additionalButton?.text {
                 label.text = text
             } else if let imageName = configuration.additionalButton?.image {
-                self.image.image = imageName.withRenderingMode(.alwaysTemplate).resizableImage(withCapInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), resizingMode: .stretch)
+                self.image.image = imageName.with(insets: .init(top: 10, left: 10, bottom: 10, right: 10))?.withRenderingMode(.alwaysTemplate)
             } else {
                 label.text = nil
                 self.image.image = nil
