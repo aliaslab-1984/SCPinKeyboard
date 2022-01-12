@@ -133,6 +133,8 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         } else {
             item.toggle(true)
         }
+        
+        item.animateTouch()
     }
     
     public func setTheme(_ theme: SCTheme) {
