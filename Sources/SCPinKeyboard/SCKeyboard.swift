@@ -122,6 +122,9 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         
         delegate?.userDidPressKey(keyValue: number)
         
+        let cell = collectionView.cellForItem(at: indexPath) as? PadKey
+        cell?.animateTouch()
+        
         guard collectionView.numberOfItems(inSection: 0) == 12,
             let item = collectionView.cellForItem(at: IndexPath(item: 11, section: 0)) as? PadKey else {
             return
@@ -133,8 +136,6 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
         } else {
             item.toggle(true)
         }
-        
-        item.animateTouch()
     }
     
     public func setTheme(_ theme: SCTheme) {
