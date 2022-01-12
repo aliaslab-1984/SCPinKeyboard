@@ -162,21 +162,26 @@ final class PadKey: UICollectionViewCell {
         self.label.textColor = self.configuration.theme.textColor
         self.label.font = self.configuration.font
         if image.image != nil {
-            self.image.tintColor = padItem != .custom ? self.configuration.theme.accentColor : self.configuration.theme.secondAccent
-            if padItem == .custom {
-                self.image.backgroundColor = self.configuration.theme.textColor
-                self.image.layer.masksToBounds = true
-                self.image.layer.cornerRadius = image.frame.height / 4
-                self.image.setNeedsDisplay()
-            } else {
-                self.image.backgroundColor = nil
-                self.image.layer.cornerRadius = 0
-                self.image.layer.masksToBounds = false
+            self.image.tintColor = self.configuration.theme.accentColor
+        }
+        self.image.backgroundColor = nil
+    }
+    
+    public func animateTouch() {
+        guard isEnabled else {
+            return
+        }
+        
+        UIView.animateKeyframes(withDuration: 0.25, delay: 0.0, options: [.allowUserInteraction]) { [weak self] in
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+                self?.label.textColor = .lightGray
+                self?.image.tintColor = .lightGray
             }
             
-            layoutSubviews()
-        } else {
-            self.image.backgroundColor = nil
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+                self?.label.textColor = self?.configuration.theme.textColor
+                self?.image.tintColor = self?.configuration.theme.accentColor
+            }
         }
     }
     
@@ -194,23 +199,7 @@ final class PadKey: UICollectionViewCell {
                 return
             }
             sSelf.image.tintColor = enabled ? sSelf.configuration.theme.accentColor : sSelf.configuration.theme.secondAccent
-            if sSelf.padItem == .custom {
-                sSelf.image.backgroundColor = enabled ? sSelf.configuration.theme.textColor : .lightText
-            } else {
-                sSelf.image.backgroundColor = nil
-            }
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if padItem == .custom {
-            self.image.layer.masksToBounds = true
-            self.image.layer.cornerRadius = image.frame.height / 4
-        } else {
-            self.image.layer.cornerRadius = 0
-            self.image.layer.masksToBounds = false
+            sSelf.image.backgroundColor = nil
         }
     }
     
