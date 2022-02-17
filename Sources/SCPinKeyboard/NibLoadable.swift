@@ -26,7 +26,7 @@ public extension NibLoadable where Self: UIView {
         return UINib(nibName: Self.nibName, bundle: bundle)
     }
     
-    func setupFromNib() {
+    func setupFromNib(border: CGFloat = 0.0) {
         
         guard let view = Self.nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             fatalError("Error loading \(self) from nib")
@@ -35,15 +35,15 @@ public extension NibLoadable where Self: UIView {
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 11.0, *) {
-            view.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-            view.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-            view.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-            view.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            view.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: border).isActive = true
+            view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: border).isActive = true
+            view.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -border).isActive = true
+            view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -border).isActive = true
         } else {
-            view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-            view.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-            view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+            view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: border).isActive = true
+            view.topAnchor.constraint(equalTo: topAnchor, constant: border).isActive = true
+            view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -border).isActive = true
+            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -border).isActive = true
         }
     }
 }

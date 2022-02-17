@@ -15,6 +15,8 @@ public class SecretInputDot: UIView {
     
     private (set) var isOn = false
     
+    private let padding: CGFloat = 2
+    
     public init(frame: CGRect, theme: SCTheme = EdgedCornerTheme()) {
         self.theme = theme
         super.init(frame: .zero)
@@ -34,21 +36,33 @@ public class SecretInputDot: UIView {
         }
         theme.accentColor.setStroke()
 
-        let circlePath = UIBezierPath(ovalIn: CGRect(x: 2, y: 2, width: rect.width - 2*2, height: rect.height - 2*2))
+        let padded = CGRect(x: padding, y: padding,
+                            width: rect.width - padding * 2,
+                            height: rect.height - padding * 2)
+        let circlePath = UIBezierPath(ovalIn: padded)
         circlePath.lineWidth = 2
 
         circlePath.stroke()
         circlePath.fill()
     }
     
-    public func toggle(_ to: Bool) {
-        self.isOn = to
+    func toggle() {
+        isOn.toggle()
+        self.setNeedsDisplay()
+    }
+    
+    func tickOn() { setOn(true) }
+    
+    func tickOff() { setOn(false) }
+    
+    private func setOn(_ status: Bool) {
+        isOn = status
         self.setNeedsDisplay()
     }
     
 }
 
-public class SecretInputView: UIView {
+/*public class SecretInputView: UIView {
     
     private let tick: UIView
 
@@ -116,5 +130,5 @@ public class SecretInputView: UIView {
     func isOn() -> Bool {
         return !tick.isHidden
     }
-}
+}*/
 #endif

@@ -13,27 +13,27 @@ public protocol PinValidator: AnyObject {
     func validate()
 }
 
+@IBDesignable
 public class PinView: UIView {
     
     private var theme: SCTheme = EdgedCornerTheme()
     
-    private var spaceBetweenPinViews: CGFloat = 8
+    private let spaceBetweenPinViews: CGFloat = 8
+    private let verticalPadding: CGFloat = 8
     
     private var inputViews = [SecretInputDot]()
     private var pinBuffer = ""
-    
-    private let verticalPadding: CGFloat = 8
     
     private var pinLength = 6
     
     private weak var delegate: PinValidator?
     
     required init?(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
         drawInputFrames()
     }
     
+    // Preview in Interface Builder
     public override init(frame: CGRect) {
         super.init(frame: frame)
         drawInputFrames()
@@ -70,12 +70,10 @@ public class PinView: UIView {
     
     private func drawInputFrames() {
     
-        inputViews.forEach {
-            $0.removeFromSuperview()
-        }
+        inputViews.forEach { $0.removeFromSuperview() }
         inputViews.removeAll()
-        let range = 0 ..< pinLength
-        range.forEach { _ in
+        
+        for _ in 0 ..< pinLength {
             let iView = SecretInputDot(frame: .zero, theme: theme)
             inputViews.append(iView)
             addSubview(iView)
@@ -85,9 +83,8 @@ public class PinView: UIView {
     private func changeStatusOfInputViews(_ marked: Int) {
         
         if marked >= 0 && marked < inputViews.count {
-            
             let toChange = inputViews[marked]
-            toChange.toggle(!toChange.isOn)
+            toChange.toggle()
         }
     }
     
@@ -96,20 +93,13 @@ public class PinView: UIView {
     }
     
     public func reset() {
-        
         pinBuffer = ""
-        for pinView in inputViews {
-            pinView.toggle(false)
-        }
+        inputViews.forEach { $0.tickOff() }
     }
     
-    public func pinCounter() -> Int {
-        return pinBuffer.count
-    }
+    public var pinCount: Int { return pinBuffer.count }
     
-    public func getPin() -> String {
-        return pinBuffer
-    }
+    public var pin: String { return pinBuffer }
     
     public func errorAnimation() {
         
