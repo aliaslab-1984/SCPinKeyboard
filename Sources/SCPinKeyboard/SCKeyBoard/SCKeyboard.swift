@@ -51,6 +51,10 @@ public class SCKeyboard: UIView, NibLoadable {
         delegate?.userDidPressKey(keyValue: sender.tag)
     }
     
+    public override func prepareForInterfaceBuilder() {
+        setupUI()
+    }
+    
     private func setupUI() {
         
         setupFromNib(border: 6.0)

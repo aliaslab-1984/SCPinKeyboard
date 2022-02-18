@@ -25,10 +25,14 @@ public extension NibLoadable where Self: UIView {
         let bundle = Bundle(for: Self.self)
         return UINib(nibName: Self.nibName, bundle: bundle)
     }
+
+    static var nibSC: UINib {
+        return UINib(nibName: Self.nibName, bundle: Bundle.module)
+    }
     
     func setupFromNib(border: CGFloat = 0.0) {
         
-        guard let view = Self.nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+        guard let view = Self.nibSC.instantiate(withOwner: self, options: nil).first as? UIView else {
             fatalError("Error loading \(self) from nib")
         }
         
