@@ -22,14 +22,19 @@ public class SCKeyboard: UIView, NibLoadable {
     @IBInspectable
     public var buttonsColor: UIColor = .lightGray {
         didSet {
-            buttonsBgColor(color: buttonsColor)
+            applyButtonsBgColor()
         }
     }
     
     @IBInspectable
     public var buttonsTextColor: UIColor = .blue {
+        didSet { applyButtonsText() }
+    }
+    
+    @IBInspectable
+    public var buttonsFont = UIFont.systemFont(ofSize: 30) {
         didSet {
-            buttonsText(color: buttonsTextColor)
+            applyFont()
         }
     }
     
@@ -66,8 +71,9 @@ private extension SCKeyboard {
         
         setupFromNib(border: 6.0)
         roundedBorder()
-        buttonsBgColor(color: buttonsColor)
-        buttonsText(color: buttonsTextColor)
+        applyFont()
+        applyButtonsBgColor()
+        applyButtonsText()
     }
     
     func roundedBorder() {
@@ -96,17 +102,25 @@ private extension SCKeyboard {
         stacks.forEach { $0.spacing = 8 }
     }
     
-    func buttonsBgColor(color: UIColor) {
-        
-        let buttons = subviews(ofType: UIButton.self)
-        buttons.forEach { $0.backgroundColor = color }
-    }
-    
-    func buttonsText(color: UIColor) {
+    func applyFont() {
         
         let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
-            button.setTitleColor(color, for: .normal)
+            button.titleLabel?.font = buttonsFont
+        }
+    }
+    
+    func applyButtonsBgColor() {
+        
+        let buttons = subviews(ofType: UIButton.self)
+        buttons.forEach { $0.backgroundColor = buttonsColor }
+    }
+    
+    func applyButtonsText() {
+        
+        let buttons = subviews(ofType: UIButton.self)
+        buttons.forEach { button in
+            button.setTitleColor(buttonsTextColor, for: .normal)
             button.tintColor = buttonsTextColor
         }
     }

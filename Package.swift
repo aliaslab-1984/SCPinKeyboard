@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -22,8 +22,7 @@ let package = Package(
         .target(
             name: "SCPinKeyboard",
             dependencies: [],
-            resources: [
-                        .process("SCKeyboard.xib")]),
+            resources: [.process("SCKeyBoard/SCKeyboard.xib")]),
         .testTarget(
             name: "SCPinKeyboardTests",
             dependencies: ["SCPinKeyboard"]),
