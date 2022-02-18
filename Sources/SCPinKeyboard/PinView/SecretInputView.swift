@@ -9,110 +9,54 @@
 #if canImport(UIKit)
 import UIKit
 
-public class SecretInputDot: UIView {
+class SecretInputView: UIView, SecretView {
     
-    public var theme: SCTheme
-    
-    private (set) var isOn = false
-    
-    private let padding: CGFloat = 2
-    
-    public init(frame: CGRect, theme: SCTheme = EdgedCornerTheme()) {
-        self.theme = theme
-        super.init(frame: .zero)
-        self.backgroundColor = .clear
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    public override func draw(_ rect: CGRect) {
-        
-        if self.isOn {
-            theme.accentColor.setFill()
-        } else {
-            UIColor.clear.setFill()
-        }
-        theme.accentColor.setStroke()
-
-        let padded = CGRect(x: padding, y: padding,
-                            width: rect.width - padding * 2,
-                            height: rect.height - padding * 2)
-        let circlePath = UIBezierPath(ovalIn: padded)
-        circlePath.lineWidth = 2
-
-        circlePath.stroke()
-        circlePath.fill()
-    }
-    
-    func toggle() {
-        isOn.toggle()
-        self.setNeedsDisplay()
-    }
-    
-    func tickOn() { setOn(true) }
-    
-    func tickOff() { setOn(false) }
-    
-    private func setOn(_ status: Bool) {
-        isOn = status
-        self.setNeedsDisplay()
-    }
-    
-}
-
-/*public class SecretInputView: UIView {
+    private let tickPercentage: CGFloat = 0.5
+    private let cornerRadius: CGFloat = 10.0
     
     private let tick: UIView
+    
+    private let theme: SCTheme
+    
+    // TODO: @IBInspectable -> see drawInputFrames
+    //static var background: UIColor = .orange
+    //static var circleBackground: UIColor = .blue
+    //static var shadowColor: UIColor = .blue
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect,
+         theme: SCTheme = EdgedCornerTheme()) {
         
-        let radius: CGFloat = 0.15 * min(frame.size.height, frame.size.width)
-        tick = SecretInputView.circleView(with: radius, color: .blue)
+        tick = SecretInputView.circleView(with: cornerRadius * 0.75,
+                                          color: theme.accentColor)
+        self.theme = theme
         super.init(frame: frame)
         
-        backgroundColor = UIColor.red
+        backgroundColor = theme.backgroundColor
+        layer.cornerRadius = cornerRadius
+        addShadow(shadowColor: theme.backgroundColor )
+
         tick.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tick)
         
-        if let _ = NSLayoutConstraint.Attribute(rawValue: 0) {
-            
-            NSLayoutConstraint.activate(
-                [
-                    tick.heightAnchor.constraint(equalToConstant: radius * 2),
-                    tick.widthAnchor.constraint(equalToConstant: radius * 2)
-                ]
-            )
-        }
-        
         NSLayoutConstraint.activate([
-            tick.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            tick.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            tick.heightAnchor.constraint(equalTo: heightAnchor,
+                                         multiplier: tickPercentage),
+            tick.widthAnchor.constraint(equalTo: widthAnchor,
+                                        multiplier: tickPercentage),
+            tick.centerXAnchor.constraint(equalTo: centerXAnchor),
+            tick.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
     }
     
-    public override func draw(_ rect: CGRect) {
+    private static func circleView(with radius: CGFloat,
+                                   color: UIColor) -> UIView {
         
-        if let context = UIGraphicsGetCurrentContext() {
-            context.setLineWidth(2.0)
-            context.setStrokeColor(UIColor.purple.cgColor)
-            context.move(to: CGPoint(x: 0, y: self.frame.height))
-            context.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
-            context.strokePath()
-        }
-    }
-    
-    private static func circleView(with radius: CGFloat, color: UIColor) -> UIView {
-        
-        let circle = CGRect(x: 0, y: 0, width: 2 * radius, height: 2 * radius)
-        
-        let circleView = UIView(frame: circle)
+        let circleView = UIView(frame: .zero)
         circleView.layer.cornerRadius = radius
         circleView.backgroundColor = color
         circleView.isHidden = true
@@ -127,8 +71,25 @@ public class SecretInputDot: UIView {
         tick.isHidden = true
     }
     
-    func isOn() -> Bool {
+    func toggle() {
+        tick.isHidden = !tick.isHidden
+    }
+    
+    var isOn: Bool {
         return !tick.isHidden
     }
-}*/
+    
+    private func addShadow(shadowColor: UIColor,
+                           shadowOffset: CGSize = CGSize(width: 1.0,
+                                                         height: 2.0),
+                           shadowOpacity: Float = 0.4,
+                           shadowRadius: CGFloat = 2.0) {
+        
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowOffset = shadowOffset
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowRadius = shadowRadius
+    }
+}
+
 #endif

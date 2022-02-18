@@ -16,12 +16,12 @@ public protocol PinValidator: AnyObject {
 @IBDesignable
 public class PinView: UIView {
     
-    private var theme: SCTheme = EdgedCornerTheme()
+    var theme: SCTheme = EdgedCornerTheme()
     
     private let spaceBetweenPinViews: CGFloat = 8
     private let verticalPadding: CGFloat = 8
     
-    private var inputViews = [SecretInputDot]()
+    private var inputViews = [SecretView]()
     private var pinBuffer = ""
     
     private var pinLength = 6
@@ -68,26 +68,6 @@ public class PinView: UIView {
         drawInputFrames()
     }
     
-    private func drawInputFrames() {
-    
-        inputViews.forEach { $0.removeFromSuperview() }
-        inputViews.removeAll()
-        
-        for _ in 0 ..< pinLength {
-            let iView = SecretInputDot(frame: .zero, theme: theme)
-            inputViews.append(iView)
-            addSubview(iView)
-        }
-    }
-    
-    private func changeStatusOfInputViews(_ marked: Int) {
-        
-        if marked >= 0 && marked < inputViews.count {
-            let toChange = inputViews[marked]
-            toChange.toggle()
-        }
-    }
-    
     public func setDelegate(_ delegate: PinValidator?) {
         self.delegate = delegate
     }
@@ -111,6 +91,36 @@ public class PinView: UIView {
         }, completion: { _ in
             self.reset()
         })
+    }
+}
+
+private extension PinView {
+    
+    func drawInputFrames() {
+    
+        inputViews.forEach { $0.removeFromSuperview() }
+        inputViews.removeAll()
+        
+        for _ in 0 ..< pinLength {
+            let iView = secretView(with: theme)
+            inputViews.append(iView)
+            addSubview(iView)
+        }
+    }
+    
+    func secretView(with theme: SCTheme) -> SecretView {
+        
+        return theme.squarePin ?
+        SecretInputView(frame: .zero, theme: theme) :
+        SecretInputDot(frame: .zero, theme: theme)
+    }
+    
+    func changeStatusOfInputViews(_ marked: Int) {
+        
+        if marked >= 0 && marked < inputViews.count {
+            let toChange = inputViews[marked]
+            toChange.toggle()
+        }
     }
 }
 
