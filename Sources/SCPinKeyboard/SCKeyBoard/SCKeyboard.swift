@@ -55,7 +55,14 @@ public class SCKeyboard: UIView, NibLoadable {
         setupUI()
     }
     
-    private func setupUI() {
+    public static func biometricImage(named: String) -> UIImage? {
+        return UIImage(named: named, in: Bundle.module, compatibleWith: nil)
+    }
+}
+ 
+private extension SCKeyboard {
+    
+    func setupUI() {
         
         setupFromNib(border: 6.0)
         roundedBorder()
@@ -63,7 +70,7 @@ public class SCKeyboard: UIView, NibLoadable {
         buttonsText(color: buttonsTextColor)
     }
     
-    private func roundedBorder() {
+    func roundedBorder() {
         
         backgroundColor = .clear
         
@@ -79,6 +86,7 @@ public class SCKeyboard: UIView, NibLoadable {
             if button.tag == -1 {
                 if #available(iOS 15.0, *) {
                     let backImage = UIImage(systemName: "delete.backward")
+                    // button.contentHorizontalAlignment = .right
                     button.setImage(backImage, for: .normal)
                 }
             }
@@ -88,13 +96,13 @@ public class SCKeyboard: UIView, NibLoadable {
         stacks.forEach { $0.spacing = 8 }
     }
     
-    private func buttonsBgColor(color: UIColor) {
+    func buttonsBgColor(color: UIColor) {
         
         let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { $0.backgroundColor = color }
     }
     
-    private func buttonsText(color: UIColor) {
+    func buttonsText(color: UIColor) {
         
         let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in

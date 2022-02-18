@@ -16,9 +16,12 @@ public protocol SCTheme {
     var accentColor: UIColor { get }
     var textColor: UIColor { get }
     var secondAccent: UIColor { get }
+    
     var cornerConfiguration: CornerConfiguration { get }
     var cornerRadius: CGFloat { get }
     var interItemSpacing: CGSize { get set }
+    
+    var squarePin: Bool { get }
 }
 
 public enum CornerConfiguration {
@@ -42,36 +45,34 @@ public struct EdgedCornerTheme: SCTheme {
     public var accentColor: UIColor
     public var secondAccent: UIColor
     public var textColor: UIColor
-    public var cornerConfiguration: CornerConfiguration
-    public var cornerRadius: CGFloat
-    public var interItemSpacing: CGSize
+    
+    public let cornerConfiguration: CornerConfiguration = .edgeCorners
+    public let cornerRadius: CGFloat = 12.0
+    public var interItemSpacing = CGSize(width: 1, height: 1)
+    public let squarePin = false
     
     public init() {
         
         if #available(iOS 13.0, *) {
-            self.backgroundColor = .secondarySystemFill
+            backgroundColor = .secondarySystemFill
         } else {
-            self.backgroundColor = UIColor.lightGray
+            backgroundColor = UIColor.lightGray
         }
         if #available(iOS 13.0, *) {
-            self.accentColor = .systemBlue
+            accentColor = .systemBlue
         } else {
-            self.accentColor = .blue
+            accentColor = .blue
         }
         if #available(iOS 13.0, *) {
-            self.secondAccent = .systemBlue
+            secondAccent = .systemBlue
         } else {
-            self.secondAccent = .blue
+            secondAccent = .blue
         }
         if #available(iOS 13.0, *) {
-            self.textColor = .label
+            textColor = .label
         } else {
-            self.textColor = .darkGray
+            textColor = .darkGray
         }
-        
-        cornerConfiguration = .edgeCorners
-        cornerRadius = 12.0
-        interItemSpacing = .init(width: 1, height: 1)
     }
 }
 
@@ -81,37 +82,34 @@ public struct AllRoundedCornersTheme: SCTheme {
     public var accentColor: UIColor
     public var secondAccent: UIColor
     public var textColor: UIColor
-    public var cornerConfiguration: CornerConfiguration
-    public var cornerRadius: CGFloat
-    public var interItemSpacing: CGSize
     
+    public let cornerConfiguration: CornerConfiguration = .allCorners
+    public let cornerRadius: CGFloat = 12.0
+    public var interItemSpacing = CGSize(width: 1, height: 1)
+    public let squarePin = false
     
     public init() {
         
         if #available(iOS 13.0, *) {
-            self.backgroundColor = .secondarySystemFill
+            backgroundColor = .secondarySystemFill
         } else {
-            self.backgroundColor = UIColor.lightGray
+            backgroundColor = UIColor.lightGray
         }
         if #available(iOS 13.0, *) {
-            self.accentColor = .systemBlue
+            accentColor = .systemBlue
         } else {
-            self.accentColor = .blue
+            accentColor = .blue
         }
         if #available(iOS 13.0, *) {
-            self.secondAccent = .systemBlue
+            secondAccent = .systemBlue
         } else {
-            self.secondAccent = .blue
+            secondAccent = .blue
         }
         if #available(iOS 13.0, *) {
-            self.textColor = .label
+            textColor = .label
         } else {
-            self.textColor = .darkGray
+            textColor = .darkGray
         }
-        
-        cornerConfiguration = .allCorners
-        cornerRadius = 12.0
-        interItemSpacing = .init(width: 1, height: 1)
     }
 }
 
