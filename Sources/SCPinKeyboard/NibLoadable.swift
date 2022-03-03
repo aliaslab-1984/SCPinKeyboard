@@ -25,16 +25,16 @@ public extension NibLoadable where Self: UIView {
         let bundle = Bundle(for: Self.self)
         return UINib(nibName: Self.nibName, bundle: bundle)
     }
-
-    static var nibSC: UINib {
-        return UINib(nibName: Self.nibName, bundle: Bundle.module)
-    }
     
     func setupFromNib(border: CGFloat = 0.0) {
         
-        guard let view = Self.nibSC.instantiate(withOwner: self, options: nil).first as? UIView else {
+        guard let view = Self.nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             fatalError("Error loading \(self) from nib")
         }
+        setup(view: view, border: border)
+    }
+    
+    func setup(view: UIView, border: CGFloat = 0.0) {
         
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +49,21 @@ public extension NibLoadable where Self: UIView {
             view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -border).isActive = true
             view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -border).isActive = true
         }
+    }
+}
+
+internal extension NibLoadable where Self: UIView {
+    
+    static var nibSC: UINib {
+        return UINib(nibName: Self.nibName, bundle: Bundle.module)
+    }
+    
+    func setupFromSCNib(border: CGFloat = 0.0) {
+        
+        guard let view = Self.nibSC.instantiate(withOwner: self, options: nil).first as? UIView else {
+            fatalError("Error loading \(self) from SC-nib")
+        }
+        setup(view: view, border: border)
     }
 }
 #endif

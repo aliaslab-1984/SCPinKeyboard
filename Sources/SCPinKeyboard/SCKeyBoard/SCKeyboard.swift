@@ -69,7 +69,7 @@ private extension SCKeyboard {
     
     func setupUI() {
         
-        setupFromNib(border: 6.0)
+        setupFromSCNib(border: 6.0)
         roundedBorder()
         applyFont()
         applyButtonsBgColor()
@@ -83,6 +83,9 @@ private extension SCKeyboard {
         let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
             button.layer.cornerRadius = 16.0
+            if #available(iOS 13.0, *) {
+                button.layer.cornerCurve = .continuous
+            }
             
             if button.tag == -2 {
                 button.backgroundColor = .clear
@@ -128,11 +131,11 @@ private extension SCKeyboard {
 
 extension UIView {
     
-    func subviews<T: UIView> (ofType type: T.Type) -> [T] {
+    func subviews<T: UIView> (ofType levelType: T.Type) -> [T] {
         
         var result = self.subviews.compactMap {$0 as? T}
         for sub in self.subviews {
-            result.append(contentsOf: sub.subviews(ofType: type))
+            result.append(contentsOf: sub.subviews(ofType: levelType))
         }
         return result
     }
