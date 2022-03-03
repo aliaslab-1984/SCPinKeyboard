@@ -37,6 +37,9 @@ class SecretInputView: UIView, SecretView {
         
         backgroundColor = theme.backgroundColor
         layer.cornerRadius = cornerRadius
+        if #available(iOS 13.0, *) {
+            layer.cornerCurve = .continuous
+        }
         addShadow(shadowColor: theme.backgroundColor )
 
         tick.translatesAutoresizingMaskIntoConstraints = false
@@ -53,11 +56,20 @@ class SecretInputView: UIView, SecretView {
         
     }
     
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        tick.layer.cornerRadius = frame.height / 4.0
+//    }
+    
     private static func circleView(with radius: CGFloat,
                                    color: UIColor) -> UIView {
         
         let circleView = UIView(frame: .zero)
         circleView.layer.cornerRadius = radius
+        if #available(iOS 13.0, *) {
+            circleView.layer.cornerCurve = .continuous
+        }
         circleView.backgroundColor = color
         circleView.isHidden = true
         return circleView
