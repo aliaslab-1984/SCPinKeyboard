@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -12,7 +14,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCKeyboard" customModule="iOS_SecureCallOTP_Radius" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCKeyboard" customModule="TSSpid" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="CqA-8s-fZL">
             <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
@@ -24,9 +26,9 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="4wW-TK-mIJ">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                             <subviews>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsZ-CN-3co">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsZ-CN-3co">
                                     <rect key="frame" x="0.0" y="0.0" width="124.5" height="54"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="1"/>
@@ -34,9 +36,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="WIB-Hd-3NE"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCp-uc-zml">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCp-uc-zml">
                                     <rect key="frame" x="125.5" y="0.0" width="124" height="54"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="2"/>
@@ -44,9 +46,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="nQK-hR-mN3"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFh-XB-Qbh">
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFh-XB-Qbh">
                                     <rect key="frame" x="250.5" y="0.0" width="124.5" height="54"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="3"/>
@@ -59,9 +61,9 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dr7-yI-VXe">
                             <rect key="frame" x="0.0" y="55" width="375" height="53.5"/>
                             <subviews>
-                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eB0-xD-h1e">
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eB0-xD-h1e">
                                     <rect key="frame" x="0.0" y="0.0" width="124.5" height="53.5"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="4"/>
@@ -69,9 +71,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="aII-LA-rFt"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzQ-0K-ePI">
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzQ-0K-ePI">
                                     <rect key="frame" x="125.5" y="0.0" width="124" height="53.5"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="5"/>
@@ -79,9 +81,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="500-gU-gpy"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apx-Sb-J8r">
+                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apx-Sb-J8r">
                                     <rect key="frame" x="250.5" y="0.0" width="124.5" height="53.5"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="6"/>
@@ -94,9 +96,9 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z30-9A-OUG">
                             <rect key="frame" x="0.0" y="109.5" width="375" height="54"/>
                             <subviews>
-                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cy-K9-Dr5">
+                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cy-K9-Dr5">
                                     <rect key="frame" x="0.0" y="0.0" width="124.5" height="54"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="7"/>
@@ -104,9 +106,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="Ucd-B2-71a"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DmU-NT-R5x">
+                                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DmU-NT-R5x">
                                     <rect key="frame" x="125.5" y="0.0" width="124" height="54"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="8"/>
@@ -114,9 +116,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="0Uo-Ju-As6"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PT-b6-ZRf">
+                                <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PT-b6-ZRf">
                                     <rect key="frame" x="250.5" y="0.0" width="124.5" height="54"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="9"/>
@@ -129,18 +131,18 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="O8w-ju-6f9">
                             <rect key="frame" x="0.0" y="164.5" width="375" height="53.5"/>
                             <subviews>
-                                <button opaque="NO" tag="-2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zd9-wx-Rz7">
+                                <button opaque="NO" tag="-2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zd9-wx-Rz7">
                                     <rect key="frame" x="0.0" y="0.0" width="124.5" height="53.5"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="a6v-F5-PSj"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hq-TN-jjT">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hq-TN-jjT">
                                     <rect key="frame" x="125.5" y="0.0" width="124" height="53.5"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat Medium" pointSize="32"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="0"/>
@@ -148,9 +150,9 @@
                                         <action selector="didPressedButton:" destination="-1" eventType="touchUpInside" id="UGV-xi-pUG"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcB-7v-eAQ">
+                                <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcB-7v-eAQ">
                                     <rect key="frame" x="250.5" y="0.0" width="124.5" height="53.5"/>
-                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                     <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" image="backKey"/>
                                     <connections>
@@ -162,7 +164,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="Qwx-Zg-tjI"/>
             <color key="tintColor" red="0.0" green="0.54509803921568623" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ZZm-qI-ITz" firstAttribute="bottom" secondItem="Qwx-Zg-tjI" secondAttribute="bottom" constant="-1" id="9Ix-ya-uhm"/>
@@ -171,11 +173,13 @@
                 <constraint firstItem="ZZm-qI-ITz" firstAttribute="top" secondItem="Qwx-Zg-tjI" secondAttribute="top" constant="1" id="nhW-mf-bCr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="Qwx-Zg-tjI"/>
             <point key="canvasLocation" x="836" y="191.6041979010495"/>
         </view>
     </objects>
     <resources>
-        <image name="backKey" width="200" height="100"/>
+        <image name="backKey" width="250" height="115"/>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

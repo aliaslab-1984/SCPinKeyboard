@@ -9,12 +9,7 @@
 #if canImport(UIKit)
 import UIKit
 
-public protocol SCKeyboardDelegate: AnyObject {
-    
-    func userDidPressKey(keyValue: Int)
-}
-
-public class CustomSCKeyboard: UIView {
+public class SCCollectionKeyboard: UIView {
     
     private weak var delegate: SCKeyboardDelegate?
     
@@ -87,7 +82,7 @@ public class CustomSCKeyboard: UIView {
     }
 }
 
-extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
+extension SCCollectionKeyboard: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView,
                                layout collectionViewLayout: UICollectionViewLayout,
@@ -148,7 +143,7 @@ extension CustomSCKeyboard: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CustomSCKeyboard: UICollectionViewDataSource {
+extension SCCollectionKeyboard: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 12
