@@ -11,6 +11,7 @@ import UIKit
 
 public protocol PinValidator: AnyObject {
     func validate()
+    func onBio()
 }
 
 @IBDesignable
@@ -129,6 +130,11 @@ extension PinView: SCKeyboardDelegate {
     public func userDidPressKey(keyValue: Int) {
         
         //printDebug("Pressed: \(keyValue)")
+        
+        guard keyValue != -2 else {
+            delegate?.onBio()
+            return
+        }
         
         let marked = pinBuffer.count
         if keyValue < 0 {

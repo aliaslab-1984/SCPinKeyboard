@@ -10,14 +10,22 @@
 import UIKit
 
 public protocol SCKeyboardDelegate: AnyObject {
-    
     func userDidPressKey(keyValue: Int)
+}
+
+public enum BioName: String {
+    case Fingerprint
+    case FaceID
 }
 
 @IBDesignable
 public class SCKeyboard: UIView, NibLoadable {
 
     private weak var delegate: SCKeyboardDelegate?
+    
+    private var enabled = true
+    
+    private var withBioButton: BioName?
     
     @IBInspectable
     public var buttonsColor: UIColor = .lightGray {
@@ -63,6 +71,27 @@ public class SCKeyboard: UIView, NibLoadable {
     public static func biometricImage(named: String) -> UIImage? {
         return UIImage(named: named, in: Bundle.module, compatibleWith: nil)
     }
+    public static func biometricImage(type: BioName) -> UIImage? {
+        return biometricImage(named: type.rawValue)
+    }
+    
+    public func setBioButton(type: BioName?) {
+        
+        withBioButton = type
+        let buttons = subviews(ofType: UIButton.self)
+        if let bio = buttons.first(where: { $0.tag == -2 }) {
+            bioButton(bio)
+        }
+    }
+    
+    public var isEnabled: Bool {
+        get { enabled }
+        set {
+            enabled = newValue
+            let buttons = subviews(ofType: UIButton.self)
+            buttons.forEach { $0.isEnabled = enabled }
+        }
+    }
 }
  
 private extension SCKeyboard {
@@ -74,6 +103,11 @@ private extension SCKeyboard {
         applyFont()
         applyButtonsBgColor()
         applyButtonsText()
+        
+        let buttons = subviews(ofType: UIButton.self)
+        buttons.forEach {
+            $0.setTitleColor(.gray.withAlphaComponent(0.5), for: .disabled)
+        }
     }
     
     func roundedBorder() {
@@ -88,9 +122,7 @@ private extension SCKeyboard {
             }
             
             if button.tag == -2 {
-                button.backgroundColor = .clear
-                button.isUserInteractionEnabled = false
-                button.alpha = 0
+                bioButton(button)
             }
             if button.tag == -1 {
                 if #available(iOS 15.0, *) {
@@ -103,6 +135,20 @@ private extension SCKeyboard {
             
         let stacks = subviews(ofType: UIStackView.self)
         stacks.forEach { $0.spacing = 8 }
+    }
+    
+    func bioButton(_ button: UIButton) {
+        
+        if let bioType = withBioButton {
+            let image = SCKeyboard.biometricImage(type: bioType)
+            button.setImage(image, for: .normal)
+            button.isUserInteractionEnabled = true
+            button.alpha = 1.0
+        } else {
+            button.backgroundColor = .clear
+            button.isUserInteractionEnabled = false
+            button.alpha = 0.0
+        }
     }
     
     func applyFont() {
