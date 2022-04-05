@@ -27,6 +27,18 @@ public class SCKeyboard: UIView, NibLoadable {
     
     private var withBioButton: BioName?
     
+    var cornerRadius: CGFloat = 16
+    
+    private var circularWidthConstraints = [Int: NSLayoutConstraint]()
+    private var rectangularWidthConstraints = [Int: NSLayoutConstraint]()
+    /// circular buttons
+    public var circular: Bool = false {
+        didSet {
+            applyWidthConstraint()
+            roundedBorder()
+        }
+    }
+    
     @IBInspectable
     public var buttonsColor: UIColor = .lightGray {
         didSet {
@@ -43,6 +55,12 @@ public class SCKeyboard: UIView, NibLoadable {
     public var buttonsFont = UIFont.systemFont(ofSize: 30) {
         didSet {
             applyFont()
+        }
+    }
+    
+    public var buttonsBorder: UIColor = .clear {
+        didSet {
+            applyButtonsBorder()
         }
     }
     
@@ -99,6 +117,8 @@ private extension SCKeyboard {
     func setupUI() {
         
         setupFromSCNib(border: 6.0)
+        createWidthConstraint()
+        applyWidthConstraint()
         roundedBorder()
         applyFont()
         applyButtonsBgColor()
@@ -110,13 +130,37 @@ private extension SCKeyboard {
         }
     }
     
+    func createWidthConstraint() {
+        
+        let buttons = subviews(ofType: UIButton.self)
+        for (index, button) in buttons.enumerated() {
+            let circularConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant: 0)
+            circularWidthConstraints[index] = circularConstraint
+            let rectangularConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button.superview, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant: 0)
+            rectangularWidthConstraints[index] = rectangularConstraint
+            //widthConstraint.isActive = true
+        }
+    }
+    
+    func applyWidthConstraint() {
+        
+        let circularActive = circular
+        for (_, constraint) in circularWidthConstraints {
+            constraint.isActive = circularActive
+        }
+        for (_, constraint) in rectangularWidthConstraints {
+            constraint.isActive = !circularActive
+        }
+    }
+    
     func roundedBorder() {
         
         backgroundColor = .clear
         
         let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
-            button.layer.cornerRadius = 16.0
+            button.layer.cornerRadius = circular ? button.frame.height / 2 : cornerRadius
+            button.imageView?.contentMode = .scaleAspectFit
             if #available(iOS 13.0, *) {
                 button.layer.cornerCurve = .continuous
             }
@@ -140,8 +184,14 @@ private extension SCKeyboard {
     func bioButton(_ button: UIButton) {
         
         if let bioType = withBioButton {
+            button.backgroundColor = buttonsColor
+            
             let image = SCKeyboard.biometricImage(type: bioType)
-            button.setImage(image, for: .normal)
+            let reduxHeight = button.frame.height * 0.55
+            let size = CGSize(width: reduxHeight, height: reduxHeight)
+            let img = image?.resized(to: size)
+            button.setImage(img?.withRenderingMode(.alwaysTemplate), for: .normal)
+            button.tintColor = buttonsTextColor
             button.isUserInteractionEnabled = true
             button.alpha = 1.0
         } else {
@@ -165,6 +215,15 @@ private extension SCKeyboard {
         buttons.forEach { $0.backgroundColor = buttonsColor }
     }
     
+    func applyButtonsBorder() {
+        
+        let buttons = subviews(ofType: UIButton.self)
+        buttons.forEach { button in
+            button.layer.borderWidth = buttonsBorder == .clear ? 0 : 1
+            button.layer.borderColor = buttonsBorder.cgColor
+        }
+    }
+    
     func applyButtonsText() {
         
         let buttons = subviews(ofType: UIButton.self)
@@ -184,6 +243,35 @@ extension UIView {
             result.append(contentsOf: sub.subviews(ofType: levelType))
         }
         return result
+    }
+}
+
+extension UIImage {
+    
+//    @available(iOS 10.0, *)
+//    func resized(to size: CGSize) -> UIImage {
+//        return UIGraphicsImageRenderer(size: size).image { _ in
+//            draw(in: CGRect(origin: .zero, size: size))
+//        }
+//    }
+    
+    func resized(to size: CGSize) -> UIImage? {
+        
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
+        ]
+        
+        guard let imageData = pngData(),
+              let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil),
+              let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+        else {
+            return nil
+        }
+        
+        return UIImage(cgImage: image)
     }
 }
 

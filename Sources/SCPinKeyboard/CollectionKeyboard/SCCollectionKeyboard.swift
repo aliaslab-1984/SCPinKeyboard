@@ -30,12 +30,26 @@ public class SCCollectionKeyboard: UIView {
     private var characterCount: Int = 0
     
     public init(configuration: SCConfiguration?) {
+        
         if let conf = configuration {
             self.configuration = conf
         } else {
             self.configuration = SCDefaultConfiguration()
         }
         super.init(frame: .zero)
+        
+        self.addSubview(collectionView)
+        
+        constraintCollectionView()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        configuration = SCDefaultConfiguration()
+        super.init(coder: coder)
         
         self.addSubview(collectionView)
         
@@ -60,10 +74,6 @@ public class SCCollectionKeyboard: UIView {
     
     public func setDelegate(_ delegate: SCKeyboardDelegate?) {
         self.delegate = delegate
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     public override func layoutSubviews() {
