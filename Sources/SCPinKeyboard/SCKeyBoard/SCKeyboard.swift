@@ -102,6 +102,14 @@ public class SCKeyboard: UIView, NibLoadable {
         }
     }
     
+    public func fluidColors(normal: UIColor, highlighted: UIColor) {
+        
+        let buttons = subviews(ofType: FluidButton.self)
+        buttons.forEach {
+            $0.fluidColors(normal: buttonsColor, highlighted: buttonsBorder)
+        }
+    }
+    
     public var isEnabled: Bool {
         get { enabled }
         set {
