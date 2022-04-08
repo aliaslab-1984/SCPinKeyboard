@@ -17,7 +17,7 @@ public protocol PinValidator: AnyObject {
 @IBDesignable
 public class PinView: UIView {
     
-    var theme: SCTheme = EdgedCornerTheme()
+    var theme: SCPinTheme = BasicPinTheme()
     
     private let spaceBetweenPinViews: CGFloat = 8
     private let verticalPadding: CGFloat = 8
@@ -40,13 +40,15 @@ public class PinView: UIView {
         drawInputFrames()
     }
     
-    public func setTheme(_ scTheme: SCTheme) {
-        self.theme = scTheme
+    public func setTheme(_ pinTheme: SCPinTheme) {
+        self.theme = pinTheme
         drawInputFrames()
     }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
+        
+        backgroundColor = .clear
         
         let floatLenght = CGFloat(pinLength)
         let subdivision = frame.width - spaceBetweenPinViews * floatLenght
@@ -109,9 +111,9 @@ private extension PinView {
         }
     }
     
-    func secretView(with theme: SCTheme) -> SecretView {
+    func secretView(with theme: SCPinTheme) -> SecretView {
         
-        return theme.squarePin ?
+        return theme.square ?
         SecretInputView(frame: .zero, theme: theme) :
         SecretInputDot(frame: .zero, theme: theme)
     }

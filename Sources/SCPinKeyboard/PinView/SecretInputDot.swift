@@ -10,17 +10,15 @@ import UIKit
 
 class SecretInputDot: UIView, SecretView {
     
-    private var theme: SCTheme
+    private var theme: SCPinTheme
     
     private(set) var isOn = false
     
-    private let padding: CGFloat = 2
-    
     public init(frame: CGRect,
-                theme: SCTheme = EdgedCornerTheme()) {
+                theme: SCPinTheme = BasicPinTheme()) {
         self.theme = theme
         super.init(frame: .zero)
-        self.backgroundColor = .clear
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -30,19 +28,23 @@ class SecretInputDot: UIView, SecretView {
     public override func draw(_ rect: CGRect) {
         
         if self.isOn {
-            theme.accentColor.setFill()
+            theme.fullColor.setFill()
         } else {
-            UIColor.clear.setFill()
+            theme.emptyColor.setFill()
         }
-        theme.accentColor.setStroke()
 
+        let padding = CGFloat(theme.padding)
+        let width = max(rect.width - padding * 2, 4.0)
+        let height = max(rect.height - padding * 2, 4.0)
         let padded = CGRect(x: padding, y: padding,
-                            width: rect.width - padding * 2,
-                            height: rect.height - padding * 2)
+                            width: width, height: height)
         let circlePath = UIBezierPath(ovalIn: padded)
         circlePath.lineWidth = 2
 
-        circlePath.stroke()
+        if let border = theme.borderColor {
+            border.setStroke()
+            circlePath.stroke()
+        }
         circlePath.fill()
     }
     
@@ -59,7 +61,6 @@ class SecretInputDot: UIView, SecretView {
         isOn = status
         self.setNeedsDisplay()
     }
-    
 }
 
 #endif

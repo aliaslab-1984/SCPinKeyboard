@@ -40,7 +40,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="GsZ-CN-3co" firstAttribute="height" secondItem="yCO-Xt-s9V" secondAttribute="height" id="5kh-sI-FtO"/>
                                         <constraint firstItem="GsZ-CN-3co" firstAttribute="centerX" secondItem="yCO-Xt-s9V" secondAttribute="centerX" id="Csb-we-mVN"/>
@@ -61,7 +61,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="QCp-uc-zml" firstAttribute="height" secondItem="El8-hK-ff2" secondAttribute="height" id="4PY-Rd-Lcs"/>
                                         <constraint firstItem="QCp-uc-zml" firstAttribute="centerX" secondItem="El8-hK-ff2" secondAttribute="centerX" id="lvV-5T-avh"/>
@@ -82,7 +82,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="IFh-XB-Qbh" firstAttribute="height" secondItem="kfx-zg-OdR" secondAttribute="height" id="IHL-fF-GZb"/>
                                         <constraint firstItem="IFh-XB-Qbh" firstAttribute="centerY" secondItem="kfx-zg-OdR" secondAttribute="centerY" id="IZP-SL-asQ"/>
@@ -108,7 +108,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="eB0-xD-h1e" firstAttribute="centerX" secondItem="vxi-AQ-a1h" secondAttribute="centerX" id="KQh-P9-AwA"/>
                                         <constraint firstItem="eB0-xD-h1e" firstAttribute="centerY" secondItem="vxi-AQ-a1h" secondAttribute="centerY" id="S0L-1F-36c"/>
@@ -129,7 +129,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="EzQ-0K-ePI" firstAttribute="centerX" secondItem="KJp-RN-Cy0" secondAttribute="centerX" id="CcC-sC-2UX"/>
                                         <constraint firstItem="EzQ-0K-ePI" firstAttribute="height" secondItem="KJp-RN-Cy0" secondAttribute="height" id="LxJ-Sg-aBa"/>
@@ -150,7 +150,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="apx-Sb-J8r" firstAttribute="centerY" secondItem="8ZO-I2-OeE" secondAttribute="centerY" id="Qh4-RO-q5T"/>
                                         <constraint firstItem="apx-Sb-J8r" firstAttribute="centerX" secondItem="8ZO-I2-OeE" secondAttribute="centerX" id="X7J-Je-aQS"/>
@@ -176,7 +176,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="5cy-K9-Dr5" firstAttribute="centerX" secondItem="BfE-1b-Zvo" secondAttribute="centerX" id="4aV-jI-wKg"/>
                                         <constraint firstItem="5cy-K9-Dr5" firstAttribute="height" secondItem="BfE-1b-Zvo" secondAttribute="height" id="QJZ-g6-4LH"/>
@@ -197,7 +197,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="DmU-NT-R5x" firstAttribute="height" secondItem="i15-rI-bWP" secondAttribute="height" id="499-4S-D4D"/>
                                         <constraint firstItem="DmU-NT-R5x" firstAttribute="centerY" secondItem="i15-rI-bWP" secondAttribute="centerY" id="8FR-RA-rMw"/>
@@ -218,7 +218,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="7PT-b6-ZRf" firstAttribute="height" secondItem="FLh-5t-Pyy" secondAttribute="height" id="C3S-ji-Szh"/>
                                         <constraint firstItem="7PT-b6-ZRf" firstAttribute="centerY" secondItem="FLh-5t-Pyy" secondAttribute="centerY" id="mTN-kH-DI2"/>
@@ -242,7 +242,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="zd9-wx-Rz7" firstAttribute="height" secondItem="pnm-Gs-evM" secondAttribute="height" id="7QN-bJ-eKG"/>
                                         <constraint firstItem="zd9-wx-Rz7" firstAttribute="centerX" secondItem="pnm-Gs-evM" secondAttribute="centerX" id="N82-iC-2HR"/>
@@ -263,7 +263,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="1hq-TN-jjT" firstAttribute="centerX" secondItem="Htm-Xy-vc0" secondAttribute="centerX" id="3Mi-9s-xeK"/>
                                         <constraint firstItem="1hq-TN-jjT" firstAttribute="height" secondItem="Htm-Xy-vc0" secondAttribute="height" id="Iq1-JZ-4MD"/>
@@ -283,7 +283,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="FcB-7v-eAQ" firstAttribute="width" secondItem="o1F-sq-Mbf" secondAttribute="width" priority="800" id="3Kz-xW-pGA"/>
                                         <constraint firstItem="FcB-7v-eAQ" firstAttribute="height" secondItem="o1F-sq-Mbf" secondAttribute="height" id="a7m-v8-Bju"/>
@@ -310,9 +310,6 @@
     </objects>
     <resources>
         <image name="backKey" width="250" height="115"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

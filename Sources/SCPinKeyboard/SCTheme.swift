@@ -19,9 +19,8 @@ public protocol SCTheme {
     
     var cornerConfiguration: CornerConfiguration { get }
     var cornerRadius: CGFloat { get }
-    var interItemSpacing: CGSize { get set }
     
-    var squarePin: Bool { get }
+    var interItemSpacing: CGSize { get set }
 }
 
 public enum CornerConfiguration {
@@ -50,6 +49,7 @@ public struct EdgedCornerTheme: SCTheme {
     public let cornerRadius: CGFloat = 12.0
     public var interItemSpacing = CGSize(width: 1, height: 1)
     public let squarePin = false
+    public let pinPadding = 2
     
     public init() {
         
@@ -87,6 +87,7 @@ public struct AllRoundedCornersTheme: SCTheme {
     public let cornerRadius: CGFloat = 12.0
     public var interItemSpacing = CGSize(width: 1, height: 1)
     public let squarePin = false
+    public let pinPadding = 2
     
     public init() {
         

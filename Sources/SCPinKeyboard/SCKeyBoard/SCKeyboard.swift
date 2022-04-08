@@ -102,11 +102,11 @@ public class SCKeyboard: UIView, NibLoadable {
         }
     }
     
-    public func fluidColors(normal: UIColor, highlighted: UIColor) {
+    public func fluidColors(highlighted: UIColor) {
         
         let buttons = subviews(ofType: FluidButton.self)
         buttons.forEach {
-            $0.fluidColors(normal: buttonsColor, highlighted: buttonsBorder)
+            $0.fluidColors(normal: buttonsColor, highlighted: highlighted)
         }
     }
     
@@ -117,6 +117,13 @@ public class SCKeyboard: UIView, NibLoadable {
             let buttons = subviews(ofType: UIButton.self)
             buttons.forEach { $0.isEnabled = enabled }
         }
+    }
+    
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        updateCgColors()
+        setNeedsDisplay()
     }
 }
  
@@ -232,6 +239,13 @@ private extension SCKeyboard {
         }
     }
     
+    func updateCgColors() {
+        let buttons = subviews(ofType: UIButton.self)
+        buttons.forEach { button in
+            button.layer.borderColor = buttonsBorder.cgColor
+        }
+    }
+    
     func applyButtonsText() {
         
         let buttons = subviews(ofType: UIButton.self)
@@ -256,31 +270,31 @@ extension UIView {
 
 extension UIImage {
     
-//    @available(iOS 10.0, *)
-//    func resized(to size: CGSize) -> UIImage {
-//        return UIGraphicsImageRenderer(size: size).image { _ in
-//            draw(in: CGRect(origin: .zero, size: size))
-//        }
-//    }
-    
-    func resized(to size: CGSize) -> UIImage? {
-        
-        let options: [CFString: Any] = [
-            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-            kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceShouldCacheImmediately: true,
-            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
-        ]
-        
-        guard let imageData = pngData(),
-              let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil),
-              let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
-        else {
-            return nil
+    @available(iOS 10.0, *)
+    func resized(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
         }
-        
-        return UIImage(cgImage: image)
     }
+    
+//    func resized(to size: CGSize) -> UIImage? {
+//        
+//        let options: [CFString: Any] = [
+//            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+//            kCGImageSourceCreateThumbnailWithTransform: true,
+//            kCGImageSourceShouldCacheImmediately: true,
+//            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
+//        ]
+//        
+//        guard let imageData = pngData(),
+//              let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil),
+//              let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+//        else {
+//            return nil
+//        }
+//        
+//        return UIImage(cgImage: image)
+//    }
 }
 
 #endif
