@@ -20,11 +20,13 @@ public enum BioName: String {
 
 @IBDesignable
 public class SCKeyboard: UIView, NibLoadable {
+    
+    private static let backTag = -1
+    private static let bioTag = -2
 
     private weak var delegate: SCKeyboardDelegate?
     
     private var enabled = true
-    
     private var withBioButton: BioName?
     
     var cornerRadius: CGFloat = 16
@@ -94,17 +96,13 @@ public class SCKeyboard: UIView, NibLoadable {
     }
     
     public func setBioButton(type: BioName?) {
-        
         withBioButton = type
-        let buttons = subviews(ofType: UIButton.self)
-        if let bio = buttons.first(where: { $0.tag == -2 }) {
+        if let bio = buttons.first(where: { $0.tag == SCKeyboard.bioTag }) {
             bioButton(bio)
         }
     }
     
     public func fluidColors(highlighted: UIColor) {
-        
-        let buttons = subviews(ofType: FluidButton.self)
         buttons.forEach {
             $0.fluidColors(normal: buttonsColor, highlighted: highlighted)
         }
@@ -114,8 +112,16 @@ public class SCKeyboard: UIView, NibLoadable {
         get { enabled }
         set {
             enabled = newValue
-            let buttons = subviews(ofType: UIButton.self)
             buttons.forEach { $0.isEnabled = enabled }
+        }
+    }
+    
+    public var backHidden: Bool {
+        get {
+            return buttons.first { $0.tag == SCKeyboard.backTag }?.isHidden ?? true
+        }
+        set {
+            buttons.first { $0.tag == SCKeyboard.backTag }?.isHidden = newValue
         }
     }
     
@@ -129,6 +135,10 @@ public class SCKeyboard: UIView, NibLoadable {
  
 private extension SCKeyboard {
     
+    var buttons: [FluidButton] {
+        return subviews(ofType: FluidButton.self)
+    }
+    
     func setupUI() {
         
         setupFromSCNib(border: 6.0)
@@ -139,7 +149,6 @@ private extension SCKeyboard {
         applyButtonsBgColor()
         applyButtonsText()
         
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach {
             $0.setTitleColor(.gray.withAlphaComponent(0.5), for: .disabled)
         }
@@ -147,7 +156,6 @@ private extension SCKeyboard {
     
     func createWidthConstraint() {
         
-        let buttons = subviews(ofType: UIButton.self)
         for (index, button) in buttons.enumerated() {
             let circularConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant: 0)
             circularWidthConstraints[index] = circularConstraint
@@ -172,18 +180,17 @@ private extension SCKeyboard {
         
         backgroundColor = .clear
         
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
-            button.layer.cornerRadius = circular ? button.frame.height / 2 : cornerRadius
             button.imageView?.contentMode = .scaleAspectFit
+            button.layer.cornerRadius = circular ? button.frame.height / 2 : cornerRadius
             if #available(iOS 13.0, *) {
                 button.layer.cornerCurve = .continuous
             }
             
-            if button.tag == -2 {
+            if button.tag == SCKeyboard.bioTag {
                 bioButton(button)
             }
-            if button.tag == -1 {
+            if button.tag == SCKeyboard.backTag {
                 if #available(iOS 15.0, *) {
                     let backImage = UIImage(systemName: "delete.backward")
                     // button.contentHorizontalAlignment = .right
@@ -217,22 +224,16 @@ private extension SCKeyboard {
     }
     
     func applyFont() {
-        
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
             button.titleLabel?.font = buttonsFont
         }
     }
     
     func applyButtonsBgColor() {
-        
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { $0.backgroundColor = buttonsColor }
     }
     
     func applyButtonsBorder() {
-        
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
             button.layer.borderWidth = buttonsBorder == .clear ? 0 : 1
             button.layer.borderColor = buttonsBorder.cgColor
@@ -240,15 +241,12 @@ private extension SCKeyboard {
     }
     
     func updateCgColors() {
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
             button.layer.borderColor = buttonsBorder.cgColor
         }
     }
     
     func applyButtonsText() {
-        
-        let buttons = subviews(ofType: UIButton.self)
         buttons.forEach { button in
             button.setTitleColor(buttonsTextColor, for: .normal)
             button.tintColor = buttonsTextColor
