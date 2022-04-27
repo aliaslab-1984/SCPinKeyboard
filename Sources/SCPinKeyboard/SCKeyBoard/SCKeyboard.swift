@@ -33,11 +33,13 @@ public class SCKeyboard: UIView, NibLoadable {
     
     private var circularWidthConstraints = [Int: NSLayoutConstraint]()
     private var rectangularWidthConstraints = [Int: NSLayoutConstraint]()
+    
     /// circular buttons
     public var circular: Bool = false {
         didSet {
             applyWidthConstraint()
-            roundedBorder()
+            setNeedsLayout()
+            //layoutIfNeeded()
         }
     }
     
@@ -102,6 +104,12 @@ public class SCKeyboard: UIView, NibLoadable {
         }
     }
     
+    public func setFont(_ font: UIFont) {
+        buttons.forEach {
+            $0.titleLabel?.font = font
+        }
+    }
+    
     public func fluidColors(highlighted: UIColor) {
         buttons.forEach {
             $0.fluidColors(normal: buttonsColor, highlighted: highlighted)
@@ -130,6 +138,11 @@ public class SCKeyboard: UIView, NibLoadable {
         
         updateCgColors()
         setNeedsDisplay()
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        roundedBorder()
     }
 }
  
@@ -200,7 +213,10 @@ private extension SCKeyboard {
         }
             
         let stacks = subviews(ofType: UIStackView.self)
-        stacks.forEach { $0.spacing = 8 }
+        stacks.forEach { stack in
+            if stack.axis == .vertical { stack.spacing = 16 }
+            else { stack.spacing = 8 }
+        }
     }
     
     func bioButton(_ button: UIButton) {
