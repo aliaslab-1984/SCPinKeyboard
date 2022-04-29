@@ -104,12 +104,6 @@ public class SCKeyboard: UIView, NibLoadable {
         }
     }
     
-    public func setFont(_ font: UIFont) {
-        buttons.forEach {
-            $0.titleLabel?.font = font
-        }
-    }
-    
     public func fluidColors(highlighted: UIColor) {
         buttons.forEach {
             $0.fluidColors(normal: buttonsColor, highlighted: highlighted)
@@ -205,8 +199,7 @@ private extension SCKeyboard {
             }
             if button.tag == SCKeyboard.backTag {
                 if #available(iOS 15.0, *) {
-                    let backImage = UIImage(systemName: "delete.backward")
-                    // button.contentHorizontalAlignment = .right
+                    let backImage = weightedImage(systemName: "delete.backward")
                     button.setImage(backImage, for: .normal)
                 }
             }
@@ -219,16 +212,38 @@ private extension SCKeyboard {
         }
     }
     
+    @available(iOS 15, *)
+    private func weightedImage(systemName: String,
+                               multiplier: CGFloat = 1.0) -> UIImage? {
+        
+        let weight: UIImage.SymbolWeight = buttonsFont.fontDescriptor.symbolicTraits.contains(.traitBold) ? .bold : .regular
+        let fontConfig = UIImage.SymbolConfiguration(
+            pointSize: buttonsFont.pointSize * multiplier,
+            weight: weight)
+        return UIImage(systemName: systemName,
+                       withConfiguration: fontConfig)
+    }
+    
     func bioButton(_ button: UIButton) {
         
         if let bioType = withBioButton {
             button.backgroundColor = buttonsColor
             
-            let image = SCKeyboard.biometricImage(type: bioType)
-            let reduxHeight = button.frame.height * 0.55
-            let size = CGSize(width: reduxHeight, height: reduxHeight)
-            let img = image?.resized(to: size)
-            button.setImage(img?.withRenderingMode(.alwaysTemplate), for: .normal)
+            let bioImg: UIImage?
+            if #available(iOS 15.0, *) {
+                let imgName = bioType == .FaceID ? "faceid" : "touchid"
+                bioImg = weightedImage(systemName: imgName,
+                                       multiplier: 1.25)
+            } else {
+                let image = SCKeyboard.biometricImage(type: bioType)
+                let reduxHeight = button.frame.height * 0.55
+                let size = CGSize(width: reduxHeight,
+                                  height: reduxHeight)
+                bioImg = image?.resized(to: size)
+                    .withRenderingMode(.alwaysTemplate)
+            }
+            
+            button.setImage(bioImg, for: .normal)
             button.tintColor = buttonsTextColor
             button.isUserInteractionEnabled = true
             button.alpha = 1.0
