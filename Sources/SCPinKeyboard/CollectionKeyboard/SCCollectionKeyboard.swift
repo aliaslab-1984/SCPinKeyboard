@@ -31,8 +31,7 @@ public class SCCollectionKeyboard: UIView {
     
     public var biometricButtonEnabled: Bool = true {
         didSet {
-            let collectionCell = collectionView.cellForItem(at: IndexPath(item: 9, section: 0))
-            collectionCell?.isUserInteractionEnabled = biometricButtonEnabled
+            collectionView.reloadItems(at: [IndexPath(item: 9, section: 0)])
         }
     }
     
@@ -182,6 +181,7 @@ extension SCCollectionKeyboard: UICollectionViewDataSource {
         } else {
             if indexPath.item == 9 {
                 cella.configure(with: (.custom, configuration))
+                cella.isUserInteractionEnabled = biometricButtonEnabled
             } else if indexPath.item == 10 {
                 cella.configure(with: (.number(number: String(0)), configuration))
             } else {
