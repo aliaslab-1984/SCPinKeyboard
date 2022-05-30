@@ -29,6 +29,13 @@ public class SCCollectionKeyboard: UIView {
     
     private var characterCount: Int = 0
     
+    public var biometricButtonEnabled: Bool = true {
+        didSet {
+            let collectionCell = collectionView.cellForItem(at: IndexPath(item: 9, section: 0))
+            collectionCell?.isUserInteractionEnabled = biometricButtonEnabled
+        }
+    }
+    
     public init(configuration: SCConfiguration?) {
         
         if let conf = configuration {
