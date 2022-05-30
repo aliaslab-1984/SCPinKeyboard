@@ -16,7 +16,7 @@ class SecretInputView: UIView, SecretView {
     
     private let tick: UIView
     
-    private let theme: SCTheme
+    private let theme: SCPinTheme
     
     // TODO: @IBInspectable -> see drawInputFrames
     //static var background: UIColor = .orange
@@ -27,20 +27,20 @@ class SecretInputView: UIView, SecretView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(frame: CGRect,
-         theme: SCTheme = EdgedCornerTheme()) {
+    init(frame: CGRect = .zero,
+         theme: SCPinTheme = BasicPinTheme()) {
         
         tick = SecretInputView.circleView(with: cornerRadius * 0.75,
-                                          color: theme.accentColor)
+                                          color: theme.fullColor)
         self.theme = theme
         super.init(frame: frame)
         
-        backgroundColor = theme.backgroundColor
+        backgroundColor = theme.emptyColor
         layer.cornerRadius = cornerRadius
         if #available(iOS 13.0, *) {
             layer.cornerCurve = .continuous
         }
-        addShadow(shadowColor: theme.backgroundColor )
+        addShadow(shadowColor: theme.shadowColor)
 
         tick.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tick)
@@ -91,13 +91,15 @@ class SecretInputView: UIView, SecretView {
         return !tick.isHidden
     }
     
-    private func addShadow(shadowColor: UIColor,
+    private func addShadow(shadowColor: UIColor?,
                            shadowOffset: CGSize = CGSize(width: 1.0,
                                                          height: 2.0),
                            shadowOpacity: Float = 0.4,
                            shadowRadius: CGFloat = 2.0) {
         
-        layer.shadowColor = shadowColor.cgColor
+        guard let shadow = shadowColor else { return }
+        
+        layer.shadowColor = shadow.cgColor
         layer.shadowOffset = shadowOffset
         layer.shadowOpacity = shadowOpacity
         layer.shadowRadius = shadowRadius
