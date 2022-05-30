@@ -36,6 +36,12 @@ public class SCCollectionKeyboard: UIView {
         }
     }
     
+    public var isKeyboardEnabled: Bool = true {
+        didSet {
+            collectionView.isUserInteractionEnabled = isKeyboardEnabled
+        }
+    }
+    
     public init(configuration: SCConfiguration?) {
         
         if let conf = configuration {
